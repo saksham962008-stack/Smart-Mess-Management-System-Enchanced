@@ -1,0 +1,3212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CanteenIQ — Live Food Intelligence · Judge Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ==================================================================
+     CANTEENIQ · JUDGE EDITION — consolidated single theme
+     (Midnight Aurora / Showstopper. All previous layers merged.)
+     ================================================================== */
+
+  :root{
+    --violet:#8b5cf6;
+    --violet-soft:rgba(139,92,246,0.16);
+    --cyan:#22d3ee;
+    --cyan-soft:rgba(34,211,238,0.14);
+    --pink:#ec4899;
+    --gold:#fbbf24;
+    --blue:#3b82f6;
+
+    --emerald:#8b5cf6;
+    --emerald-soft:rgba(139,92,246,0.16);
+    --amber:#ffbf69;
+    --red:#ff5470;
+
+    --bg:#050314;
+    --surface:#0f0a28;
+    --surface-2:#171140;
+    --border:rgba(255,255,255,0.09);
+    --border-strong:rgba(255,255,255,0.18);
+    --text:#f3f0ff;
+    --text-dim:#b7aee0;
+    --text-faint:#7d76a8;
+    --radius:16px;
+    --mono-track:rgba(255,255,255,0.06);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    position:relative;
+    overflow-x:hidden;
+    background:
+      radial-gradient(900px 520px at 8% 4%, rgba(139,92,246,0.20), transparent 58%),
+      radial-gradient(800px 500px at 92% 12%, rgba(34,211,238,0.15), transparent 58%),
+      radial-gradient(700px 520px at 72% 96%, rgba(236,72,153,0.12), transparent 60%),
+      linear-gradient(135deg,#050314 0%,#090520 46%,#040b16 100%);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  body::before{
+    content:''; position:fixed; inset:-20%; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(139,92,246,0.16), transparent 24%),
+      radial-gradient(circle at 82% 15%, rgba(34,211,238,0.13), transparent 22%),
+      radial-gradient(circle at 55% 88%, rgba(255,84,112,0.08), transparent 26%);
+    filter:blur(24px);
+    animation:auroraDrift 16s ease-in-out infinite alternate;
+  }
+  @keyframes auroraDrift{
+    0%{transform:translate3d(-2%,0,0) scale(1)}
+    50%{transform:translate3d(2%,-1%,0) scale(1.03)}
+    100%{transform:translate3d(-1%,2%,0) scale(1.06)}
+  }
+  body::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:-1;
+    background:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(circle at 50% 20%, black, transparent 78%);
+  }
+
+  h1,h2,h3,h4,.mono-num,.brand-word,.nav-link,.eyebrow,.cora-instant-title strong{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--emerald-soft); color:var(--text);}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:2px;}
+
+  /* ---------- LAYOUT ---------- */
+  .shell{display:flex; min-height:100vh;}
+  .sidebar{
+    width:232px; flex-shrink:0;
+    border-right:1px solid var(--border);
+    background:linear-gradient(180deg, rgba(10,6,32,0.92), rgba(7,8,22,0.76));
+    backdrop-filter:blur(14px);
+    box-shadow:8px 0 40px rgba(0,0,0,0.22), inset -1px 0 rgba(139,92,246,0.10);
+    position:fixed; top:0; left:0; bottom:0;
+    display:flex; flex-direction:column;
+    padding:26px 18px;
+    z-index:100;
+  }
+  .brand{display:flex; align-items:center; gap:10px; padding:0 6px 26px 6px; border-bottom:1px solid var(--border); margin-bottom:20px;}
+  .brand-mark{width:34px; height:34px; flex-shrink:0;}
+  .brand-word{font-size:17px; font-weight:700; letter-spacing:-0.01em;}
+  .brand-word span{color:var(--emerald);}
+  .nav-list{list-style:none; display:flex; flex-direction:column; gap:2px; flex:1;}
+  .nav-link{
+    display:flex; align-items:center; gap:11px;
+    padding:9px 12px; border-radius:9px;
+    font-size:13.5px; font-weight:500; color:var(--text-dim);
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-link svg{width:16px; height:16px; opacity:0.8; flex-shrink:0;}
+  .nav-link:hover{background:rgba(255,255,255,0.05); color:var(--text);}
+  .nav-link.active{
+    background:linear-gradient(90deg, rgba(139,92,246,0.20), rgba(34,211,238,0.06));
+    color:#cdbfff;
+    box-shadow:inset 3px 0 0 var(--emerald);
+  }
+  .sidebar-foot{border-top:1px solid var(--border); padding-top:16px; margin-top:12px;}
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); font-weight:600;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--emerald);
+    box-shadow:0 0 0 0 rgba(139,92,246,0.5); animation:pulse-dot 2.4s infinite;
+  }
+  @keyframes pulse-dot{
+    0%{box-shadow:0 0 0 0 rgba(139,92,246,0.45);}
+    70%{box-shadow:0 0 0 7px rgba(139,92,246,0);}
+    100%{box-shadow:0 0 0 0 rgba(139,92,246,0);}
+  }
+
+  .topbar{display:none;}
+
+  main{margin-left:232px; flex:1; min-width:0; padding:36px 44px 90px 44px;}
+  main::before{
+    content:"SMART CANTEEN  •  FOOD-WASTE INTELLIGENCE  •  REAL-TIME ACTION";
+    display:block; width:max-content; max-width:100%;
+    margin:0 auto 24px;
+    padding:8px 16px;
+    border:1px solid rgba(34,211,238,0.28); border-radius:999px;
+    color:#c8f8ff;
+    background:linear-gradient(90deg, rgba(139,92,246,0.16), rgba(34,211,238,0.10));
+    font-size:9px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase;
+    box-shadow:0 0 28px rgba(34,211,238,0.08);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  section{scroll-margin-top:28px; margin-bottom:76px;}
+  .section-head{margin-bottom:22px; max-width:680px;}
+  .eyebrow{
+    font-size:11.5px; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--cyan); font-weight:600; margin-bottom:8px; display:block;
+    text-shadow:0 0 18px rgba(34,211,238,0.15);
+  }
+  .section-head h2{font-size:28px; font-weight:600; letter-spacing:-0.01em; margin-bottom:8px;}
+  .section-head p{color:var(--text-dim); font-size:14px; max-width:540px;}
+
+  .card{
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012)),
+      linear-gradient(180deg, rgba(23,17,64,0.85), rgba(10,8,32,0.90));
+    border:1px solid rgba(139,92,246,0.18);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 14px 45px rgba(0,0,0,0.18);
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px) scale(1.006);
+    border-color:rgba(139,92,246,0.30);
+    box-shadow:0 26px 70px rgba(0,0,0,0.32),0 0 32px rgba(139,92,246,0.08);
+  }
+
+  .tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; font-weight:700;
+    padding:3px 9px; border-radius:20px;
+  }
+  .tag-demo{background:rgba(242,169,60,0.13); color:var(--amber); border:1px solid rgba(242,169,60,0.3);}
+  .tag-future{background:var(--cyan-soft); color:var(--cyan); border:1px solid rgba(34,211,238,0.3);}
+
+  /* ---------- TOP PILLS ---------- */
+  .judge-live-pill{
+    position:fixed; left:50%; top:18px; transform:translateX(-50%);
+    z-index:500; padding:8px 13px; border-radius:999px;
+    background:rgba(7,5,22,0.78); border:1px solid rgba(139,92,246,0.28);
+    color:#e9e3ff; font-size:9px; font-weight:800; letter-spacing:0.12em;
+    box-shadow:0 10px 34px rgba(0,0,0,0.28);
+    backdrop-filter:blur(14px);
+  }
+  .judge-live-pill span{color:#22d3ee;}
+  .judge-theme-badge{
+    position:fixed; top:60px; right:22px; z-index:250;
+    padding:7px 12px; border:1px solid rgba(34,211,238,0.34);
+    border-radius:999px; background:rgba(10,8,28,0.72);
+    color:#bfefff; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;
+    backdrop-filter:blur(14px); box-shadow:0 8px 30px rgba(0,0,0,0.25),0 0 24px rgba(34,211,238,0.10);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; border-radius:20px; overflow:visible;
+    border:1px solid rgba(139,92,246,0.34);
+    padding:56px 48px;
+    background:
+      radial-gradient(circle at 78% 26%, rgba(34,211,238,0.20), transparent 33%),
+      radial-gradient(circle at 12% 82%, rgba(139,92,246,0.26), transparent 36%),
+      linear-gradient(135deg, rgba(19,13,48,0.96), rgba(6,12,27,0.96));
+    margin-bottom:56px;
+    box-shadow:0 30px 100px rgba(0,0,0,0.45),0 0 80px rgba(139,92,246,0.12);
+    min-height:470px;
+  }
+  .hero::after{
+    content:"CANTEENIQ";
+    position:absolute; right:28px; bottom:18px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:54px; font-weight:800; letter-spacing:0.12em;
+    color:rgba(255,255,255,0.025);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:absolute; inset:0; opacity:0.35; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:42px 42px; mask-image:radial-gradient(ellipse at 60% 30%, black 10%, transparent 70%);
+  }
+  .hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  .hero-tagline{font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-faint); font-weight:600; margin-top:14px; margin-bottom:16px;}
+  .hero h1{font-size:clamp(40px,4.6vw,64px); line-height:1.04; font-weight:700; letter-spacing:-0.02em; margin-bottom:16px; text-shadow:0 8px 40px rgba(0,0,0,0.35);}
+  .hero h1 .accent{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee,#f472b6);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.sub{color:var(--text-dim); font-size:15.5px; max-width:440px; margin-bottom:26px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px;}
+  .btn{
+    padding:11px 20px; border-radius:9px; font-size:13.5px; font-weight:600;
+    border:1px solid var(--border-strong); transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{
+    background:linear-gradient(135deg,#8b5cf6,#24d8ff);
+    border-color:rgba(255,255,255,0.25); color:#fff;
+    box-shadow:0 10px 30px rgba(139,92,246,0.30);
+  }
+  .btn-ghost{border-color:rgba(34,211,238,0.24); background:rgba(34,211,238,0.06); color:var(--text);}
+  .link-inline{font-size:13px; color:var(--cyan); font-weight:500; display:inline-flex; align-items:center; gap:5px;}
+  .judge-badge{
+    display:inline-flex; align-items:center; gap:7px; padding:7px 10px; border-radius:20px;
+    border:1px solid rgba(139,92,246,0.20); background:rgba(139,92,246,0.07);
+    color:var(--cyan); font-size:9px; letter-spacing:0.09em; text-transform:uppercase; font-weight:800;
+  }
+  .judge-live-bar{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:16px;}
+  .judge-live-dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 14px var(--cyan); animation:judgePulse 1.8s infinite;}
+  @keyframes judgePulse{50%{transform:scale(1.5); opacity:0.55;}}
+
+  .judge-hero-visual{
+    position:absolute; right:4%; top:8%; width:min(46%,520px); height:82%;
+    pointer-events:none; perspective:1000px;
+  }
+  .judge-orbit{
+    position:absolute; inset:8% 5%;
+    border:1px solid rgba(139,92,246,0.18); border-radius:50%;
+    transform:rotateX(65deg) rotateZ(-18deg);
+    box-shadow:0 0 50px rgba(139,92,246,0.06);
+  }
+  .judge-orbit.o2{inset:18% 14%; transform:rotateX(65deg) rotateZ(32deg); border-color:rgba(34,211,238,0.18);}
+  .judge-orbit::after{
+    content:""; position:absolute; width:9px; height:9px; border-radius:50%;
+    background:var(--cyan); box-shadow:0 0 18px var(--cyan);
+    left:8%; top:22%; animation:judgeOrbit 6s linear infinite;
+  }
+  .judge-orbit.o2::after{background:var(--pink); box-shadow:0 0 18px var(--pink); left:auto; top:auto; right:10%; bottom:16%; animation-duration:8s; animation-direction:reverse;}
+  @keyframes judgeOrbit{from{transform:rotate(0deg) translateX(190px) rotate(0deg)}to{transform:rotate(360deg) translateX(190px) rotate(-360deg)}}
+  .judge-core{
+    position:absolute; width:230px; height:230px; left:50%; top:50%; transform:translate(-50%,-50%) rotateX(8deg) rotateY(-12deg);
+    border-radius:42% 58% 50% 50%; display:grid; place-items:center;
+    background:
+      radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0 3%, transparent 4%),
+      radial-gradient(circle at 36% 30%, rgba(139,92,246,0.35), transparent 28%),
+      radial-gradient(circle at 52% 48%, rgba(34,211,238,0.20), transparent 48%),
+      radial-gradient(circle at 65% 70%, rgba(236,72,153,0.16), transparent 60%),
+      rgba(10,8,30,0.90);
+    border:1px solid rgba(139,92,246,0.4);
+    box-shadow:0 0 70px rgba(139,92,246,0.18), inset 0 0 45px rgba(34,211,238,0.08);
+    animation:coreFloat 5s ease-in-out infinite;
+    backdrop-filter:blur(8px);
+  }
+  .judge-core::before,.judge-core::after{
+    content:""; position:absolute; border-radius:inherit; inset:-10px;
+    border:1px solid rgba(139,92,246,0.14); transform:rotateX(62deg) rotateZ(18deg);
+  }
+  .judge-core::after{inset:-24px; border-color:rgba(34,211,238,0.10); transform:rotateX(62deg) rotateZ(-22deg);}
+  @keyframes coreFloat{
+    0%,100%{transform:translate(-50%,-50%) rotateX(8deg) rotateY(-12deg) translateY(0)}
+    50%{transform:translate(-50%,-50%) rotateX(11deg) rotateY(-18deg) translateY(-9px)}
+  }
+  .judge-core-inner{text-align:center; color:#eef; font-family:'Space Grotesk',sans-serif; z-index:2;}
+  .judge-core-inner .ai{font-size:12px; letter-spacing:0.26em; color:var(--cyan); font-weight:800;}
+  .judge-core-inner .name{font-size:32px; font-weight:800; letter-spacing:-0.04em; margin:5px 0;}
+  .judge-core-inner .live{font-size:9px; color:#93a0b0; letter-spacing:0.14em; text-transform:uppercase;}
+  .judge-chip{
+    position:absolute; padding:8px 11px; border-radius:12px; border:1px solid rgba(139,92,246,0.22);
+    background:rgba(8,6,26,0.78); color:#e9e3ff; font-size:9px; letter-spacing:0.05em;
+    box-shadow:0 14px 30px rgba(0,0,0,0.22); backdrop-filter:blur(10px);
+  }
+  .judge-chip b{color:var(--cyan); font-size:11px; display:block; margin-top:2px;}
+  .judge-chip.c1{right:6%; top:18%;}
+  .judge-chip.c2{left:2%; top:30%;}
+  .judge-chip.c3{left:12%; bottom:16%;}
+  .judge-chip.c4{right:10%; bottom:10%;}
+  .judge-scanline{position:absolute; inset:0; pointer-events:none; overflow:hidden; opacity:0.32;}
+  .judge-scanline::after{
+    content:""; position:absolute; left:0; right:0; height:2px; top:-10px;
+    background:linear-gradient(90deg, transparent, var(--cyan), transparent);
+    box-shadow:0 0 15px var(--cyan);
+    animation:scan 5s linear infinite;
+  }
+  @keyframes scan{from{top:-10px}to{top:100%}}
+
+  /* ---------- DATA RIBBON ---------- */
+  .judge-data-ribbon{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:0 0 28px;}
+  .judge-ribbon-item{
+    padding:12px 14px; border:1px solid rgba(139,92,246,0.14); border-radius:12px;
+    background:linear-gradient(180deg, rgba(139,92,246,0.05), rgba(255,255,255,0.015));
+  }
+  .judge-ribbon-item small{display:block; color:#7d76a8; text-transform:uppercase; letter-spacing:0.08em; font-size:8px; font-weight:800;}
+  .judge-ribbon-item b{display:block; font-size:17px; margin-top:2px;}
+
+  /* ---------- KPI GRID ---------- */
+  .kpi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+  .kpi-card{position:relative; overflow:hidden;}
+  .kpi-card::before{
+    content:""; position:absolute; left:0; right:0; top:0; height:2px;
+    background:linear-gradient(90deg, var(--violet), var(--cyan), var(--pink));
+    opacity:0.75;
+  }
+  .kpi-card .label{font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); font-weight:600; margin-bottom:12px;}
+  .kpi-card .value{font-size:30px; font-weight:700; letter-spacing:-0.01em; display:flex; align-items:baseline; gap:4px;}
+  .kpi-card .unit{font-size:14px; color:var(--text-dim); font-weight:500;}
+  .kpi-card .value.status-online{color:var(--emerald); font-size:20px;}
+  .kpi-foot{margin-top:14px; font-size:11.5px; color:var(--text-faint);}
+
+  /* ---------- FOOD IMPACT ---------- */
+  .food-impact-card{
+    position:relative; overflow:hidden;
+    background:radial-gradient(circle at 92% 12%, rgba(139,92,246,0.14), transparent 42%),
+      radial-gradient(circle at 8% 100%, rgba(34,211,238,0.08), transparent 40%),
+      linear-gradient(145deg, rgba(23,17,64,0.95), rgba(8,13,32,0.95));
+    border-color:rgba(139,92,246,0.22);
+  }
+  .food-impact-grid{display:grid; grid-template-columns:1.25fr 0.75fr; gap:18px; align-items:stretch;}
+  .food-impact-main{padding:22px; border:1px solid var(--border); border-radius:14px; background:rgba(255,255,255,0.02);}
+  .food-impact-eyebrow{font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--cyan); font-weight:800; margin-bottom:8px;}
+  .food-impact-big{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .food-impact-big b{font-family:'Space Grotesk',sans-serif; font-size:clamp(38px,5vw,58px); line-height:1; color:#fff;}
+  .food-impact-big span{font-size:15px; color:var(--text-dim); font-weight:600;}
+  .food-impact-sub{margin-top:8px; color:var(--text-dim); font-size:12.5px;}
+  .food-impact-note{
+    margin-top:14px; padding:10px 12px; border-left:3px solid var(--emerald);
+    border-radius:8px; background:rgba(139,92,246,0.08); color:#e7e2f4; font-size:11px; line-height:1.55;
+  }
+  .food-impact-side{display:grid; gap:12px;}
+  .food-impact-stat{padding:16px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,0.025);}
+  .food-impact-stat small{display:block; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; font-size:9.5px; font-weight:800; margin-bottom:6px;}
+  .food-impact-stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:23px;}
+  .food-impact-stat p{margin-top:4px; color:var(--text-dim); font-size:10.5px;}
+  .food-impact-live-source{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:15px;
+    font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; font-weight:800; color:var(--emerald);
+  }
+  .food-impact-live-source small{display:block; width:100%; font-size:11px; letter-spacing:0; text-transform:none; color:var(--text-faint); font-weight:500;}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--emerald); box-shadow:0 0 0 0 rgba(139,92,246,0.5); animation:pulse-dot 1.8s infinite;}
+  .food-impact-ticker{
+    margin-top:16px; padding:9px 12px; border-radius:10px; border:1px dashed rgba(34,211,238,0.22);
+    color:var(--text-faint); font-size:10px;
+  }
+
+  /* ---------- BIN STATUS ---------- */
+  .bin-hero{display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:center;}
+  .gauge-wrap{position:relative; width:200px; height:200px; margin:0 auto;}
+  .gauge-wrap svg{transform:rotate(-90deg);}
+  .gauge-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .gauge-center .pct{font-size:34px; font-weight:700;}
+  .gauge-center .pct-label{font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; margin-top:2px;}
+  .bin-meta{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .bin-meta .row{border-bottom:1px solid var(--border); padding-bottom:12px;}
+  .bin-meta .row .k{font-size:11.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;}
+  .bin-meta .row .v{font-size:19px; font-weight:600;}
+  .legend-row{display:flex; gap:18px; margin-top:20px; flex-wrap:wrap;}
+  .legend-item{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--text-dim);}
+  .legend-dot{width:8px; height:8px; border-radius:50%;}
+
+  /* ---------- PROTOTYPE ---------- */
+  .prototype-split{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center;}
+  .prototype-frame{
+    position:relative; border-radius:16px; border:1px solid var(--border);
+    background:radial-gradient(circle at 50% 30%, rgba(139,92,246,0.12), transparent 70%), var(--surface-2);
+    padding:8px; box-shadow:0 0 60px -20px rgba(139,92,246,0.25);
+  }
+  .prototype-frame .placeholder-note{
+    position:absolute; top:14px; left:14px; right:14px; z-index:3;
+    font-size:11px; color:var(--text-faint); background:rgba(10,8,29,0.8); border:1px dashed var(--border-strong);
+    padding:6px 10px; border-radius:8px; backdrop-filter:blur(6px);
+  }
+  .callout-label{
+    position:absolute; font-size:10px; letter-spacing:0.05em; font-weight:700; text-transform:uppercase;
+    background:rgba(10,8,29,0.88); border:1px solid var(--cyan); color:var(--cyan);
+    padding:4px 8px; border-radius:6px; white-space:nowrap;
+  }
+  .callout-label::before{content:''; position:absolute; width:6px; height:6px; border-radius:50%; background:var(--cyan); left:-11px; top:50%; transform:translateY(-50%);}
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{font-size:12px; padding:6px 12px; border-radius:20px; border:1px solid var(--border-strong); color:var(--text-dim);}
+
+  /* ---------- DATA FLOW ---------- */
+  .flow-row{display:flex; align-items:center; gap:0; overflow-x:auto; padding:18px 4px;}
+  .flow-node{flex-shrink:0; text-align:center; min-width:110px;}
+  .flow-node .icon{
+    width:52px; height:52px; border-radius:12px; margin:0 auto 10px auto;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(145deg, rgba(139,92,246,0.20), rgba(34,211,238,0.06));
+    border:1px solid rgba(34,211,238,0.20);
+    box-shadow:inset 0 0 24px rgba(34,211,238,0.06),0 10px 28px rgba(0,0,0,0.22);
+  }
+  .flow-node .icon svg{width:24px; height:24px; color:var(--cyan);}
+  .flow-node .name{font-size:12px; font-weight:600; letter-spacing:0.02em;}
+  .flow-connector{flex:1; min-width:36px; height:2px; position:relative; background:linear-gradient(90deg, rgba(139,92,246,0.20), rgba(34,211,238,0.32), rgba(236,72,153,0.20));}
+  .flow-connector .particle{position:absolute; top:-2.5px; width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 14px 3px rgba(34,211,238,0.75); animation:travel 2.6s linear infinite;}
+  @keyframes travel{from{left:-4px; opacity:0;} 10%{opacity:1;} 90%{opacity:1;} to{left:100%; opacity:0;}}
+
+  /* ---------- ANALYTICS ---------- */
+  .analytics-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:18px;}
+  .chart-card canvas{width:100%; display:block;}
+  .chart-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;}
+  .chart-head h3{font-size:15px; font-weight:600;}
+  .peak-highlight{
+    margin-top:14px; display:flex; align-items:center; justify-content:space-between;
+    background:rgba(242,169,60,0.08); border:1px solid rgba(242,169,60,0.25);
+    border-radius:10px; padding:12px 16px;
+  }
+  .peak-highlight .time{font-size:16px; font-weight:700; color:var(--amber);}
+  .heat-row{display:flex; gap:10px; margin-top:16px;}
+  .heat-block{flex:1; border-radius:10px; padding:16px 10px; text-align:center; border:1px solid var(--border);}
+  .heat-block .label{font-size:11.5px; text-transform:uppercase; color:var(--text-faint); letter-spacing:0.04em; margin-bottom:8px;}
+  .heat-block .lvl{font-size:12.5px; font-weight:700;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  thead th{text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-faint); font-weight:600; padding:0 12px 10px 12px; border-bottom:1px solid var(--border);}
+  tbody td{padding:14px 12px; border-bottom:1px solid var(--border);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.critical{background:rgba(242,85,90,0.06);}
+  .status-chip{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:3px 10px; border-radius:20px;}
+  .status-normal{background:var(--emerald-soft); color:var(--emerald);}
+  .status-warning{background:rgba(242,169,60,0.13); color:var(--amber);}
+  .status-critical{background:rgba(242,85,90,0.14); color:var(--red);}
+
+  /* ---------- ALERTS ---------- */
+  .alert-item{display:flex; gap:14px; padding:16px; border-radius:12px; border:1px solid var(--border); align-items:flex-start;}
+  .alert-item + .alert-item{margin-top:10px;}
+  .alert-sev{width:8px; height:8px; border-radius:50%; margin-top:6px; flex-shrink:0;}
+  .alert-body{flex:1;}
+  .alert-top{display:flex; justify-content:space-between; gap:10px; margin-bottom:4px;}
+  .alert-title{font-size:13.5px; font-weight:600;}
+  .alert-time{font-size:11.5px; color:var(--text-faint); white-space:nowrap;}
+  .alert-action{font-size:12.5px; color:var(--text-dim); margin-top:6px;}
+  .alert-action b{color:var(--text);}
+  .level-scale{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px;}
+  .level-block{border-radius:10px; padding:14px; border:1px solid var(--border); text-align:center;}
+  .level-block .n{font-size:11px; color:var(--text-faint); letter-spacing:0.04em; text-transform:uppercase;}
+  .level-block .t{font-size:14px; font-weight:700; margin:4px 0;}
+  .level-block .r{font-size:12px; color:var(--text-dim);}
+
+  /* ---------- SENSORS / ESP32 ---------- */
+  .sensor-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+  .sensor-card{text-align:left;}
+  .sensor-card .icon-wrap{
+    width:38px; height:38px; border-radius:9px; background:var(--cyan-soft);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    box-shadow:inset 0 0 25px rgba(139,92,246,0.07),0 8px 28px rgba(0,0,0,0.18);
+  }
+  .sensor-card .icon-wrap svg{width:19px; height:19px; color:var(--cyan);}
+  .sensor-card .name{font-size:14px; font-weight:600; margin-bottom:4px;}
+  .sensor-card .desc{font-size:12.5px; color:var(--text-dim);}
+
+  .esp-diagram{display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:20px; align-items:center;}
+  .esp-col{display:flex; flex-direction:column; gap:10px;}
+  .esp-col .col-title{font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); font-weight:600; margin-bottom:4px;}
+  .esp-item{font-size:13px; padding:10px 12px; border-radius:9px; background:var(--surface-2); border:1px solid var(--border);}
+  .esp-center{
+    aspect-ratio:1/1; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%), var(--surface-2);
+    border:1px solid var(--border-strong); text-align:center; padding:20px;
+  }
+  .esp-center .chip{width:56px; height:56px; margin-bottom:12px;}
+  .esp-center b{font-size:15px;}
+  .esp-center span{font-size:12px; color:var(--text-dim); margin-top:4px;}
+
+  /* ---------- FLOW STRIPS ---------- */
+  .strip{display:flex; align-items:center; gap:0; flex-wrap:wrap;}
+  .strip-step{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:10px 16px; font-size:13px; font-weight:600;}
+  .strip-arrow{padding:0 12px; color:var(--text-faint); font-size:16px;}
+
+  /* ---------- ECO POINTS ---------- */
+  .eco-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:24px; align-items:center;}
+  .eco-points{font-size:52px; font-weight:700; color:var(--emerald);}
+  .eco-points .of{font-size:22px; color:var(--text-dim); font-weight:500;}
+  .progress-track{width:100%; height:8px; border-radius:6px; background:var(--mono-track); margin:16px 0; overflow:hidden;}
+  .progress-fill{height:100%; border-radius:6px; background:linear-gradient(90deg, var(--violet), var(--cyan), var(--pink));}
+  .badge{display:inline-flex; align-items:center; gap:8px; background:rgba(139,92,246,0.15); color:#dcd4ff; border:1px solid rgba(139,92,246,0.34); padding:6px 14px; border-radius:20px; font-size:12.5px; font-weight:700;}
+  .feedback-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px;}
+  .feedback-card .name{font-size:14px; font-weight:600; margin-bottom:10px;}
+
+  /* ---------- DECISION SUPPORT ---------- */
+  .decision-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .decision-card{
+    background:radial-gradient(circle at 90% 10%, rgba(139,92,246,0.14), transparent 40%),
+      linear-gradient(145deg, rgba(23,17,64,0.92), rgba(9,13,28,0.94));
+  }
+  .decision-card .q{font-size:15px; font-weight:600; margin-bottom:8px; line-height:1.35;}
+  .decision-card .a{font-size:12.5px; color:#aeb9d7;}
+  .before-after{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .ba-card canvas{width:100%; display:block;}
+  .ba-tag{font-size:11px; text-transform:uppercase; letter-spacing:0.05em; font-weight:700; margin-bottom:10px; display:block;}
+
+  /* ---------- FUTURE AI ---------- */
+  .future-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .future-card{border-style:dashed;}
+  .future-card .name{font-size:14.5px; font-weight:600; margin-bottom:10px;}
+  .future-flow{font-size:12.5px; color:var(--text-dim); line-height:1.7;}
+
+  /* ---------- SUSTAINABILITY ---------- */
+  .pillar-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .pillar-card .name{font-size:15px; font-weight:700; margin-bottom:10px; color:var(--emerald);}
+  .tag-cloud{display:flex; gap:8px; flex-wrap:wrap; margin-top:24px;}
+
+  /* ---------- PERFORMANCE / SYSTEM ---------- */
+  .perf-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+  .perf-card .name{font-size:13px; font-weight:600; margin-bottom:10px;}
+  .perf-card .state{font-size:12.5px; color:var(--text-faint);}
+  .sys-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .sys-item{display:flex; align-items:center; justify-content:space-between; padding:14px 16px;}
+  .sys-item .name{font-size:13px; font-weight:600;}
+  .sys-item .state{font-size:11.5px; color:var(--emerald); font-weight:600; display:flex; align-items:center; gap:6px;}
+  .sys-item .state .dot{width:6px; height:6px;}
+
+  /* ---------- RESPONSIBLE DESIGN ---------- */
+  .resp-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .resp-card ul{list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+  .resp-card li{font-size:13px; color:var(--text-dim); padding-left:18px; position:relative;}
+  .resp-can li::before{content:'✓'; position:absolute; left:0; color:var(--emerald); font-weight:700;}
+  .resp-cannot li::before{content:'✕'; position:absolute; left:0; color:var(--text-faint); font-weight:700;}
+
+  /* ---------- DECISION LOOP / SPLIT / FINAL ---------- */
+  .loop-wrap{display:flex; justify-content:center; padding:20px 0;}
+  .split-hero{display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:center;}
+  .split-side{padding:0 24px;}
+  .split-side .tag-label{font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); font-weight:600; margin-bottom:12px;}
+  .split-center{padding:0 24px; text-align:center; border-left:1px solid var(--border); border-right:1px solid var(--border);}
+  .split-center b{font-size:15px; display:block; margin-bottom:8px;}
+  .split-center span{font-size:12px; color:var(--text-dim);}
+  .final-hero{
+    text-align:center; padding:70px 30px; border-radius:20px; border:1px solid var(--border);
+    background:radial-gradient(circle at 50% 0%, rgba(34,211,238,0.10), transparent 60%), var(--surface);
+    box-shadow:0 18px 60px rgba(5,2,20,0.26);
+  }
+  .final-hero .line1{font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint); font-weight:600;}
+  .final-hero h2{font-size:38px; font-weight:700; letter-spacing:-0.01em; margin:14px 0 18px 0;}
+  .final-hero h2 .accent{color:var(--emerald);}
+  .final-hero p{color:var(--text-dim); font-size:15px;}
+
+  /* ---------- BIN FULL DEMO ---------- */
+  .bin-demo-wrap{
+    margin-top:24px; padding:22px;
+    border:1px solid rgba(242,85,90,0.28); border-radius:16px;
+    background:linear-gradient(180deg, rgba(242,85,90,0.06), rgba(19,27,29,0.9));
+  }
+  .bin-demo-head{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .bin-demo-title{font-size:16px; font-weight:700;}
+  .bin-demo-sub{font-size:12.5px; color:var(--text-dim); margin-top:4px;}
+  .bin-demo-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .bin-demo-btn{
+    border:1px solid rgba(242,85,90,0.55);
+    background:linear-gradient(135deg,#f2555a,#b92732); color:#fff;
+    border-radius:10px; padding:11px 16px; font-weight:800; font-size:13px; cursor:pointer;
+    box-shadow:0 10px 26px rgba(242,85,90,0.18);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .bin-demo-btn:hover{transform:translateY(-1px); box-shadow:0 14px 30px rgba(242,85,90,0.28);}
+  .bin-demo-reset{
+    border:1px solid var(--border-strong); background:rgba(255,255,255,0.04); color:var(--text);
+    border-radius:10px; padding:11px 16px; font-weight:700; font-size:13px; cursor:pointer;
+  }
+  .bin-demo-note{margin-top:12px; font-size:11px; color:var(--text-faint);}
+  .bin-demo-active .card.bin-hero{
+    border-color:rgba(242,85,90,0.62);
+    box-shadow:0 0 0 1px rgba(242,85,90,0.18),0 0 46px rgba(242,85,90,0.12);
+    animation:binDangerPulse 1.15s ease-in-out infinite;
+  }
+  .bin-demo-active .gauge-wrap .gauge-center .pct{color:var(--red);}
+  @keyframes binDangerPulse{
+    0%,100%{box-shadow:0 0 0 1px rgba(242,85,90,0.14),0 0 22px rgba(242,85,90,0.05)}
+    50%{box-shadow:0 0 0 1px rgba(242,85,90,0.38),0 0 52px rgba(242,85,90,0.17)}
+  }
+  body.bin-demo-active::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:1100;
+    box-shadow:inset 0 0 0 2px rgba(242,85,90,0.18);
+    animation:screenFlash .7s ease-in-out 3;
+  }
+  @keyframes screenFlash{0%,100%{opacity:.15}50%{opacity:.8}}
+  .bin-full-alert{
+    position:fixed; top:24px; right:24px; z-index:1200;
+    width:min(430px, calc(100vw - 32px));
+    padding:16px 18px;
+    border:1px solid rgba(242,85,90,0.55); border-radius:16px;
+    background:linear-gradient(180deg, rgba(55,12,16,0.98), rgba(26,10,12,0.98));
+    color:#fff;
+    box-shadow:0 24px 70px rgba(0,0,0,0.55),0 0 45px rgba(242,85,90,0.18);
+    display:none;
+    animation:binAlertIn .22s ease-out;
+  }
+  .bin-full-alert.show{display:block;}
+  @keyframes binAlertIn{from{opacity:0; transform:translateY(-10px) scale(.98)}to{opacity:1; transform:none}}
+  .bin-full-alert-row{display:flex; align-items:flex-start; gap:12px;}
+  .bin-full-alert-icon{
+    width:38px; height:38px; flex:0 0 38px; border-radius:11px;
+    display:grid; place-items:center; background:rgba(242,85,90,0.16);
+    border:1px solid rgba(242,85,90,0.35); font-size:20px;
+  }
+  .bin-full-alert strong{display:block; font-size:14px;}
+  .bin-full-alert p{margin:3px 0 0; color:#ffc5c8; font-size:12.5px; line-height:1.45;}
+  .bin-full-alert-close{border:0; background:transparent; color:#ffc5c8; cursor:pointer; font-size:18px; line-height:1; padding:0 2px;}
+  .bin-full-alert-meta{margin-top:11px; padding-top:10px; border-top:1px solid rgba(242,85,90,0.18); font-size:11px; color:#e89ca1;}
+
+  /* ---------- CORA FIRST-RUN GATE ---------- */
+  .cora-activate{position:fixed; inset:0; z-index:1400; display:flex; align-items:center; justify-content:center; background:rgba(4,8,9,0.72); backdrop-filter:blur(10px);}
+  .cora-activate.hidden{display:none;}
+  .cora-activate-card{width:min(520px, calc(100vw - 30px)); padding:30px; border:1px solid rgba(139,92,246,0.40); border-radius:22px; background:linear-gradient(180deg, rgba(19,17,46,0.98), rgba(9,8,25,0.99)); box-shadow:0 30px 100px rgba(0,0,0,0.6),0 0 60px rgba(139,92,246,0.15); text-align:center;}
+  .cora-activate-orb{width:76px; height:76px; margin:0 auto 18px; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle at 35% 30%,#ece7ff,#8b5cf6 55%,#21145f); box-shadow:0 0 40px rgba(139,92,246,0.30); color:#fff; font-size:28px;}
+  .cora-activate-card h2{font-size:24px; margin-bottom:8px;}
+  .cora-activate-card p{color:var(--text-dim); font-size:13px; margin-bottom:20px;}
+  .cora-language-label{display:block; text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); font-weight:700; margin:0 auto 7px; max-width:340px;}
+  .cora-language{display:block; width:min(340px,100%); margin:0 auto 14px; background:#0b0a22; color:var(--text); border:1px solid var(--border-strong); border-radius:10px; padding:11px 12px; font-size:13px; outline:none;}
+  .cora-language:focus{border-color:rgba(34,211,238,0.45);}
+  .cora-activate-btn{border:1px solid transparent; background:linear-gradient(135deg,#8b5cf6,#24d8ff); color:#fff; border-radius:11px; padding:12px 20px; font-weight:700; cursor:pointer; font-size:14px; box-shadow:0 10px 28px rgba(139,92,246,0.30);}
+  .cora-activate-note{margin-top:12px; color:var(--text-faint); font-size:11px;}
+
+  /* ---------- CORA PANEL ---------- */
+  .cora-fab{
+    position:fixed; right:24px; bottom:24px; z-index:300;
+    width:64px; height:64px; border-radius:50%; border:1px solid rgba(34,211,238,0.62);
+    background:radial-gradient(circle at 35% 30%,#ffffff,#a78bfa 28%,#7c3aed 58%,#140b38);
+    color:#fff; cursor:pointer;
+    box-shadow:0 0 0 4px rgba(139,92,246,0.08),0 18px 55px rgba(0,0,0,0.5),0 0 50px rgba(139,92,246,0.32);
+    display:flex; align-items:center; justify-content:center; transition:transform .18s ease;
+  }
+  .cora-fab:hover{transform:translateY(-2px) scale(1.03);}
+  .cora-fab::before{
+    content:"ASK CORA";
+    position:absolute; right:80px; white-space:nowrap;
+    padding:7px 10px; border-radius:999px;
+    background:rgba(7,5,22,0.88); border:1px solid rgba(34,211,238,0.22);
+    color:#d9fbff; font-size:9px; font-weight:800; letter-spacing:0.12em;
+    box-shadow:0 10px 30px rgba(0,0,0,0.24);
+    opacity:0; transform:translateX(6px); pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .cora-fab:hover::before{opacity:1; transform:translateX(0);}
+  .cora-orb{width:30px; height:30px; border:2px solid #fff; border-radius:50%; position:relative;}
+  .cora-orb:before,.cora-orb:after{content:''; position:absolute; top:8px; width:4px; height:4px; background:#fff; border-radius:50%;}
+  .cora-orb:before{left:6px;}
+  .cora-orb:after{right:6px;}
+  .cora-orb span{position:absolute; left:7px; right:7px; bottom:6px; height:5px; border-bottom:2px solid #fff; border-radius:0 0 10px 10px;}
+
+  .cora-panel{
+    z-index:1400; position:fixed; right:24px; bottom:100px;
+    width:min(440px, calc(100vw - 28px));
+    height:min(700px, calc(100dvh - 120px));
+    background:linear-gradient(180deg, rgba(16,14,40,0.99), rgba(8,9,24,0.99));
+    border:1px solid rgba(139,92,246,0.34); border-radius:18px;
+    box-shadow:0 30px 100px rgba(0,0,0,0.62),0 0 70px rgba(139,92,246,0.13);
+    overflow:hidden; backdrop-filter:blur(18px);
+    display:none; flex-direction:column;
+  }
+  .cora-panel.open{display:flex; animation:coraIn .18s ease-out;}
+  @keyframes coraIn{from{opacity:0; transform:translateY(10px) scale(.98)}to{opacity:1; transform:none}}
+  .cora-panel input::placeholder{color:#6f8385;}
+
+  .cora-head{padding:12px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex:0 0 auto; background:linear-gradient(90deg, rgba(139,92,246,0.10), transparent);}
+  .cora-title{display:flex; align-items:center; gap:10px;}
+  .cora-mini{width:30px; height:30px; border-radius:10px; background:rgba(139,92,246,0.14); color:#cfc4ff; display:grid; place-items:center; border:1px solid rgba(139,92,246,0.28);}
+  .cora-title strong{font-size:14px;}
+  .cora-title small{display:block; color:var(--text-faint); font-size:10px; margin-top:1px;}
+  .cora-close{width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,0.04); border:1px solid var(--border); color:#d9d2f5; font-size:18px; cursor:pointer; display:grid; place-items:center; line-height:1;}
+  .cora-close:hover{color:#fff; border-color:rgba(242,85,90,0.6); background:rgba(242,85,90,0.10);}
+
+  .cora-command{flex:0 0 auto; max-height:40%; overflow-y:auto; overflow-x:hidden; border-bottom:1px solid var(--border); background:linear-gradient(180deg, rgba(139,92,246,0.045), rgba(255,255,255,0.012));}
+  .cora-live-top{padding:12px 14px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:58px 1fr; gap:12px; align-items:center;}
+  .cora-live-orb{width:52px; height:52px; border-radius:50%; margin:auto; display:grid; place-items:center; position:relative; background:radial-gradient(circle at 35% 30%,#ecffff,#22d3ee 48%,#17366c); box-shadow:0 0 24px rgba(34,211,238,0.30); animation:coraOrbPulse 2.4s infinite;}
+  .cora-live-orb:after{content:''; position:absolute; inset:-5px; border-radius:50%; border:1px solid rgba(34,211,238,0.32); animation:coraRing 3s linear infinite;}
+  .cora-live-orb.warning{background:radial-gradient(circle at 35% 30%,#ffe7b2,#ffbf69 52%,#613b12); box-shadow:0 0 24px rgba(242,169,60,0.35);}
+  .cora-live-orb.critical{background:radial-gradient(circle at 35% 30%,#ffc1ca,#ff5470 52%,#5b0a22); box-shadow:0 0 30px rgba(242,85,90,0.45);}
+  .cora-live-orb.analyzing{background:radial-gradient(circle at 35% 30%,#e4ddff,#8b5cf6 52%,#23135f); box-shadow:0 0 24px rgba(139,92,246,0.40);}
+  .cora-orb-core{text-align:center; color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:800; line-height:1.05; font-size:10px;}
+  .cora-orb-core small{display:block; font-size:7px; letter-spacing:0.08em; margin-top:4px; opacity:0.85;}
+  @keyframes coraOrbPulse{0%,100%{transform:scale(1); filter:brightness(1)}50%{transform:scale(1.035); filter:brightness(1.12)}}
+  @keyframes coraRing{to{transform:rotate(360deg); border-color:transparent rgba(34,211,238,0.7) transparent rgba(139,92,246,0.5)}}
+  .cora-live-info b{font-size:14px;}
+  .cora-live-info p{font-size:9px; color:var(--text-faint); margin:2px 0 5px;}
+  .cora-online{font-size:9px; letter-spacing:0.08em; color:var(--emerald); font-weight:800;}
+  .cora-watch{padding:8px 14px; min-height:0; font-size:10px; color:var(--text-dim); background:rgba(255,255,255,0.02);}
+  .cora-watch strong{color:var(--cyan);}
+  .cora-watch span{display:block; margin-top:3px; font-size:9px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .cora-reason{margin:8px 12px; padding:9px 10px; border:1px solid rgba(34,211,238,0.16); border-radius:10px; background:rgba(34,211,238,0.045);}
+  .cora-reason h4{font-size:10px; margin-bottom:5px;}
+  .cora-reason-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:6px;}
+  .cora-reason-grid div{font-size:8px; color:var(--text-faint);}
+  .cora-reason-grid b{display:block; color:var(--text); font-size:10px; margin-top:2px;}
+  .cora-ops-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; padding:0 12px 9px;}
+  .cora-mini-card{display:flex; align-items:center; gap:7px; padding:8px; border-radius:10px; border:1px solid var(--border); background:rgba(255,255,255,0.025);}
+  .cora-mini-card > span{font-size:15px;}
+  .cora-mini-card small{display:block; font-size:7px; color:var(--text-faint); letter-spacing:0.06em; font-weight:800;}
+  .cora-mini-card b{display:block; font-size:10px; color:var(--text); margin-top:1px;}
+  .cora-command-actions{display:grid; grid-template-columns:repeat(5,1fr); gap:6px; padding:0 12px 9px;}
+  .cora-command-actions button{border:1px solid var(--border-strong); background:rgba(255,255,255,0.035); color:var(--text); border-radius:9px; padding:7px 6px; font-size:9px; font-weight:700; cursor:pointer;}
+  .cora-command-actions button:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-1px);}
+  .cora-thought{padding:0 12px 9px; font-size:9px; color:var(--text-faint);}
+  .cora-thought span{color:var(--cyan);}
+
+  .cora-messages{flex:1 1 auto; min-height:110px; overflow-y:auto; padding:12px; background:rgba(0,0,0,0.10);}
+  .cora-msg{max-width:88%; padding:10px 12px; border-radius:12px; margin-bottom:10px; font-size:12.5px; line-height:1.55;}
+  .cora-msg.ai{background:rgba(255,255,255,0.045); border:1px solid var(--border); color:var(--text);}
+  .cora-msg.user{margin-left:auto; background:var(--emerald-soft); border:1px solid rgba(139,92,246,0.30);}
+
+  .cora-quick{display:flex; gap:7px; flex-wrap:wrap; padding:9px 12px; border-top:1px solid var(--border); flex:0 0 auto;}
+  .cora-quick button{border:1px solid var(--border-strong); background:rgba(255,255,255,0.03); color:var(--text-dim); border-radius:16px; padding:6px 9px; font-size:10.5px; cursor:pointer;}
+  .cora-quick button:hover{color:var(--text); border-color:rgba(139,92,246,0.4);}
+
+  .cora-instant-wrap{flex:0 0 auto; max-height:128px; overflow-y:auto; padding:9px 12px 8px; border-top:1px solid var(--border); background:linear-gradient(180deg, rgba(139,92,246,0.05), rgba(255,255,255,0.015));}
+  .cora-instant-title{display:flex; align-items:center; justify-content:space-between; margin-bottom:7px;}
+  .cora-instant-title strong{font-size:10px; letter-spacing:0.07em; text-transform:uppercase; color:var(--cyan);}
+  .cora-instant-title span{font-size:8.5px; color:var(--text-faint);}
+  .cora-instant-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px;}
+  .cora-instant-grid button{min-width:0; padding:7px 5px; border-radius:9px; border:1px solid var(--border-strong); background:rgba(255,255,255,0.035); color:var(--text); font-size:9px; font-weight:700; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .cora-instant-grid button:hover{border-color:rgba(34,211,238,0.55); color:#dffaff; background:rgba(34,211,238,0.07);}
+
+  .cora-voice-compat{padding:0 12px 8px; font-size:8.5px; line-height:1.35; color:var(--text-faint); text-align:center; flex:0 0 auto;}
+  .cora-state{padding:0 12px 8px; font-size:9.5px; color:var(--text-faint); flex:0 0 auto;}
+  .cora-hint{padding:9px 14px 7px; font-size:8.5px; color:var(--text-faint); border-top:1px solid var(--border); flex:0 0 auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .cora-input{display:flex; gap:8px; padding:10px 12px; border-top:1px solid var(--border); flex:0 0 auto; background:rgba(0,0,0,0.12);}
+  .cora-input input{flex:1; min-width:0; background:#0b0a22; color:var(--text); border:1px solid var(--border-strong); border-radius:10px; padding:10px 11px; outline:none;}
+  .cora-input input:focus{border-color:rgba(139,92,246,0.55);}
+  .cora-btn{width:40px; height:40px; border-radius:10px; border:1px solid var(--border-strong); background:rgba(255,255,255,0.04); color:var(--text); cursor:pointer; flex-shrink:0;}
+  .cora-btn.primary{background:linear-gradient(135deg,#8b5cf6,#24d8ff); border-color:transparent; color:#fff;}
+  .cora-btn.listening{box-shadow:0 0 0 4px rgba(34,211,238,0.13); border-color:var(--cyan); color:var(--cyan); animation:coraMicPulse 1.1s ease-in-out infinite;}
+  @keyframes coraMicPulse{
+    0%,100%{box-shadow:0 0 0 2px rgba(34,211,238,0.08);}
+    50%{box-shadow:0 0 0 6px rgba(34,211,238,0.16),0 0 18px rgba(34,211,238,0.18);}
+  }
+
+  /* ---------- CORA EXTRA LAYERS ---------- */
+  .cora-emergency-overlay{position:fixed; inset:0; z-index:1300; display:none; place-items:center; background:rgba(30,4,7,0.58); backdrop-filter:blur(7px);}
+  .cora-emergency-overlay.show{display:grid; animation:screenFlash .8s ease-in-out infinite;}
+  .cora-emergency-card{width:min(560px, calc(100vw - 32px)); padding:34px; text-align:center; border:1px solid rgba(242,85,90,0.75); border-radius:24px; background:linear-gradient(180deg,#30090d,#12080a); box-shadow:0 0 80px rgba(242,85,90,0.25);}
+  .cora-emergency-card h2{color:var(--red); font-size:32px; letter-spacing:0.08em;}
+  .cora-emergency-card .big{font-size:54px; font-weight:800; margin:12px 0; color:#fff;}
+  .cora-emergency-card p{color:#ffc5c8;}
+  .cora-emergency-card button{margin-top:20px; padding:12px 20px; border-radius:10px; border:0; background:var(--red); color:#fff; font-weight:800; cursor:pointer;}
+
+  .cora-proactive{
+    position:fixed; top:22px; left:50%; transform:translateX(-50%); z-index:1450;
+    display:none; min-width:310px; max-width:calc(100vw - 28px);
+    padding:12px 14px; border:1px solid rgba(242,169,60,0.45); border-radius:14px;
+    background:rgba(16,15,40,0.98); box-shadow:0 18px 55px rgba(0,0,0,0.5),0 0 35px rgba(242,169,60,0.10);
+  }
+  .cora-proactive.show{display:block; animation:coraProIn .2s ease-out;}
+  .cora-proactive.critical{border-color:rgba(242,85,90,0.65); box-shadow:0 18px 55px rgba(0,0,0,0.5),0 0 35px rgba(242,85,90,0.16);}
+  .cora-proactive strong{display:block; font-size:12px;}
+  .cora-proactive span{display:block; color:var(--text-dim); font-size:10.5px; margin-top:2px;}
+  @keyframes coraProIn{from{opacity:0; transform:translate(-50%,-8px)}to{opacity:1; transform:translate(-50%,0)}}
+
+  .judge-demo-btn{
+    position:fixed; right:24px; bottom:24px; z-index:301; transform:translateX(-76px);
+    height:64px; padding:0 16px; border-radius:18px;
+    border:1px solid rgba(242,169,60,0.5); background:rgba(242,169,60,0.12);
+    color:#ffd98a; font-weight:800; cursor:pointer;
+  }
+
+  /* ---------- SECTION GLOW ---------- */
+  .judge-section-glow{position:relative;}
+  .judge-section-glow::before{
+    content:""; position:absolute; left:0; top:-18px; width:140px; height:1px;
+    background:linear-gradient(90deg, var(--cyan), transparent);
+    box-shadow:0 0 14px rgba(34,211,238,0.18);
+  }
+  .judge-tilt{transform-style:preserve-3d; will-change:transform;}
+  .judge-tilt > *{transform:translateZ(8px);}
+
+  footer{margin-left:232px; padding:26px 44px; border-top:1px solid var(--border); font-size:12px; color:var(--text-faint); display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1180px){
+    .kpi-grid{grid-template-columns:repeat(3,1fr);}
+    .sensor-grid{grid-template-columns:repeat(3,1fr);}
+    .perf-grid{grid-template-columns:repeat(3,1fr);}
+    .analytics-grid{grid-template-columns:1fr;}
+    .decision-grid{grid-template-columns:repeat(2,1fr);}
+    .future-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:1100px){
+    .judge-hero-visual{position:relative; right:auto; top:auto; width:min(480px,90%); height:340px; margin:28px auto 0;}
+    .hero{min-height:auto;}
+    .judge-data-ribbon{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:900px){
+    .sidebar{transform:translateX(-100%); transition:transform .2s ease;}
+    .sidebar.open{transform:translateX(0);}
+    main, footer{margin-left:0;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:90; padding:14px 20px;
+      background:rgba(9,6,30,0.88); backdrop-filter:blur(12px); border-bottom:1px solid var(--border);
+    }
+    .topbar .brand{border:none; padding:0; margin:0;}
+    .menu-btn{width:34px; height:34px; border-radius:9px; background:var(--surface-2); border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center;}
+    main{padding:28px 18px 70px 18px;}
+    .judge-theme-badge{top:64px; right:14px; font-size:8px; padding:6px 9px;}
+    main::before{margin-top:0;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero{padding:36px 24px;}
+    .hero h1{font-size:40px;}
+    .bin-hero{grid-template-columns:1fr;}
+    .prototype-split{grid-template-columns:1fr;}
+    .eco-grid{grid-template-columns:1fr;}
+    .split-hero{grid-template-columns:1fr;}
+    .split-center{border:none; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:20px 0; margin:20px 0;}
+    .food-impact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    .kpi-grid, .sensor-grid, .perf-grid, .decision-grid, .future-grid, .pillar-grid, .feedback-grid, .sys-grid, .resp-grid, .before-after{grid-template-columns:1fr;}
+    .esp-diagram{grid-template-columns:1fr;}
+    .level-scale{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:32px;}
+    .final-hero h2{font-size:26px;}
+    .judge-live-pill{display:none;}
+    .cora-fab::before{display:none;}
+    .cora-fab{right:14px; bottom:14px; width:56px; height:56px;}
+    .cora-panel{right:14px; bottom:80px; width:calc(100vw - 28px); height:calc(100dvh - 96px);}
+    .cora-instant-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+    .cora-command-actions{grid-template-columns:repeat(3,1fr);}
+    .judge-demo-btn{display:none;}
+    main::before{font-size:8px; letter-spacing:0.12em;}
+  }
+  @media (max-height:740px){
+    .cora-panel{height:calc(100dvh - 84px);}
+    .cora-command{max-height:32%;}
+    .cora-reason{display:none;}
+    .cora-thought{display:none;}
+    .cora-instant-wrap{max-height:96px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+/* ---------- CANTEENIQ FEATURE EXPANSION ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.feature-card{background:linear-gradient(145deg,rgba(23,17,64,.92),rgba(9,13,28,.96));border:1px solid rgba(34,211,238,.18);border-radius:16px;padding:20px;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.feature-card h3{font:600 16px 'Space Grotesk',sans-serif;margin:0 0 8px}
+.feature-muted{font-size:12px;color:var(--text-dim)}
+.feature-stat{font:700 28px 'Space Grotesk',sans-serif;margin:8px 0;color:#fff}
+.feature-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.feature-btn{border:1px solid rgba(34,211,238,.32);background:rgba(34,211,238,.09);color:#dffaff;padding:9px 12px;border-radius:9px;font-weight:700;font-size:12px;cursor:pointer}
+.feature-btn.primary{background:linear-gradient(135deg,#8b5cf6,#24d8ff);color:#fff}
+.feature-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.feature-progress{height:9px;border-radius:20px;background:rgba(255,255,255,.08);overflow:hidden;margin:10px 0}
+.feature-progress span{display:block;height:100%;width:65%;background:linear-gradient(90deg,#8b5cf6,#22d3ee);border-radius:20px;transition:width .3s}
+.feature-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.feature-table th,.feature-table td{text-align:left;padding:9px;border-bottom:1px solid var(--border)}
+.feature-table th{color:var(--text-faint);font-size:10px;text-transform:uppercase}
+.feature-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.feature-kpi{padding:12px;border:1px solid var(--border);border-radius:11px;background:rgba(255,255,255,.025)}
+.feature-kpi small{display:block;color:var(--text-faint);font-size:9px;text-transform:uppercase;letter-spacing:.06em}
+.feature-kpi b{display:block;font:700 20px 'Space Grotesk',sans-serif;margin-top:4px}
+.judge-drawer-launch{position:fixed;right:24px;bottom:100px;z-index:1250;border:1px solid rgba(34,211,238,.45);border-radius:999px;padding:12px 16px;background:linear-gradient(135deg,#8b5cf6,#087f9b);color:white;font-weight:800;box-shadow:0 12px 40px rgba(0,0,0,.4);cursor:pointer}
+.judge-drawer{position:fixed;right:20px;top:50%;transform:translate(120%,-50%);width:min(370px,calc(100vw - 30px));max-height:82vh;overflow:auto;z-index:1251;padding:20px;border:1px solid rgba(34,211,238,.35);border-radius:18px;background:linear-gradient(180deg,#151039,#080b1d);box-shadow:0 24px 80px rgba(0,0,0,.55);transition:transform .28s ease}
+.judge-drawer.open{transform:translate(0,-50%)}
+.judge-drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.judge-drawer-head h3{font:700 17px 'Space Grotesk',sans-serif}
+.judge-drawer-close{border:1px solid var(--border);background:rgba(255,255,255,.06);color:#fff;border-radius:8px;padding:5px 10px;cursor:pointer}
+.drawer-action{width:100%;display:block;text-align:left;margin:9px 0;padding:12px;border-radius:10px;border:1px solid rgba(139,92,246,.3);background:rgba(139,92,246,.1);color:#f3f0ff;cursor:pointer;font-weight:700}
+.drawer-action span{display:block;font-size:10px;color:var(--text-dim);font-weight:400;margin-top:3px}
+.drawer-status{padding:11px;border-radius:10px;background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.2);font-size:11px;color:#c8f8ff;margin-top:12px}
+.roi-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.roi-tile{padding:18px;border:1px solid rgba(34,211,238,.2);border-radius:13px;background:linear-gradient(145deg,rgba(34,211,238,.07),rgba(139,92,246,.07))}
+.roi-tile small{display:block;color:var(--text-faint);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.roi-tile b{display:block;font:700 27px 'Space Grotesk',sans-serif;margin-top:6px}
+@media(max-width:900px){.feature-grid{grid-template-columns:1fr}.roi-strip{grid-template-columns:1fr}.feature-kpis{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.judge-drawer-launch{right:12px;bottom:88px}.judge-drawer{right:10px}.feature-kpis{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="judge-live-pill"><span class="judge-live-dot"></span> LIVE · ESP32 LINK ACTIVE · <span id="pillTime"></span></div>
+<div class="judge-theme-badge">Judge Edition · Final Build</div>
+
+<div class="topbar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#8b5cf6" stroke-width="1.4"/><path d="M11 22c2-6 6-9 9-9s7 3 9 9" stroke="#22d3ee" stroke-width="1.6" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#8b5cf6"/></svg>
+    <span class="brand-word">Canteen<span>IQ</span></span>
+  </div>
+  <button class="menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="#e9efee" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="#8b5cf6" stroke-width="1.4"/><path d="M11 22c2-6 6-9 9-9s7 3 9 9" stroke="#22d3ee" stroke-width="1.6" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#8b5cf6"/></svg>
+      <span class="brand-word">Canteen<span>IQ</span></span>
+    </div>
+    <ul class="nav-list">
+      <li><a class="nav-link active" href="#dashboard"><svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="6" height="6" rx="1.2" stroke="currentColor"/><rect x="8.5" y="1.5" width="6" height="6" rx="1.2" stroke="currentColor"/><rect x="1.5" y="8.5" width="6" height="6" rx="1.2" stroke="currentColor"/><rect x="8.5" y="8.5" width="6" height="6" rx="1.2" stroke="currentColor"/></svg>Dashboard</a></li>
+      <li><a class="nav-link" href="#live-monitoring"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>Live Monitoring</a></li>
+      <li><a class="nav-link" href="#analytics"><svg viewBox="0 0 16 16" fill="none"><path d="M2 13.5V8M7 13.5V4M12 13.5V6.5M2 13.5h11" stroke="currentColor" stroke-linecap="round"/></svg>Analytics</a></li>
+      <li><a class="nav-link" href="#alerts"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5 1.5 13h13L8 1.5Z" stroke="currentColor" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.5v.1" stroke="currentColor" stroke-linecap="round"/></svg>Alerts</a></li>
+      <li><a class="nav-link" href="#eco-points"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5c3 3 5.5 5.5 5.5 8.7A5.5 5.5 0 0 1 2.5 10.2C2.5 7 5 4.5 8 1.5Z" stroke="currentColor" stroke-linejoin="round"/></svg>Eco Points</a></li>
+      <li><a class="nav-link" href="#student-activity"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.2" r="2.7" stroke="currentColor"/><path d="M2.5 14c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5" stroke="currentColor" stroke-linecap="round"/></svg>Student Activity</a></li>
+      <li><a class="nav-link" href="#prep-optimizer">AI Prep Optimizer</a></li>
+<li><a class="nav-link" href="#food-routing">Food Impact Router</a></li>
+<li><a class="nav-link" href="#hostel-leaderboard">Hostel Leaderboard</a></li>
+<li><a class="nav-link" href="#roi-ticker">Financial & Carbon ROI</a></li>
+<li><a class="nav-link" href="#future-ai"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.5 3.5l1.4 1.4M11.1 11.1l1.4 1.4M12.5 3.5l-1.4 1.4M4.9 11.1 3.5 12.5" stroke="currentColor" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" stroke="currentColor"/></svg>Future AI</a></li>
+      <li><a class="nav-link" href="#settings"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.3" stroke="currentColor"/><path d="M8 2v1.4M8 12.6V14M14 8h-1.4M3.4 8H2M12.1 3.9l-1 1M4.9 11.1l-1 1M12.1 12.1l-1-1M4.9 4.9l-1-1" stroke="currentColor" stroke-linecap="round"/></svg>Settings</a></li>
+    </ul>
+    <div class="sidebar-foot">
+      <div class="status-pill"><span class="dot"></span>System Online</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ================= HERO / LANDING ================= -->
+    <section id="home">
+      <div class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-inner">
+          <div>
+            <div class="judge-badge"><span class="judge-live-dot"></span> CYBERLYNX · JUDGE EDITION</div>
+            <div class="hero-tagline">IoT · Food-waste intelligence · Smart campus</div>
+            <h1>From food waste<br>to <span class="accent">smart decisions</span>, in one dashboard.</h1>
+            <p class="sub">CanteenIQ turns sensor readings from the canteen floor into clear, actionable insight — so your team knows what's happening, which bin needs attention, and whether an intervention actually worked.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#dashboard">View Live Dashboard</a>
+              <a class="btn btn-ghost" href="#physical-system">Explore Prototype</a>
+            </div>
+            <a class="link-inline" href="#decision-loop">How it works →</a>
+            <div class="judge-live-bar"><span class="judge-live-dot"></span><span style="font-size:10px;color:#88a0a1;letter-spacing:.08em;text-transform:uppercase;">Live intelligence layer active</span></div>
+          </div>
+          <div class="judge-hero-visual" aria-hidden="true">
+            <div class="judge-orbit"></div><div class="judge-orbit o2"></div>
+            <div class="judge-core"><div class="judge-core-inner"><div class="ai">CORA</div><div class="name">CanteenIQ</div><div class="live">LIVE INTELLIGENCE CORE</div></div></div>
+            <div class="judge-chip c1">BIN STATUS<b id="heroChipFill">87% · CRITICAL</b></div>
+            <div class="judge-chip c2">WASTE TODAY<b>4.60 kg</b></div>
+            <div class="judge-chip c3">SENSORS<b>5 / 5 ONLINE</b></div>
+            <div class="judge-chip c4">NEXT ACTION<b>COLLECT BIN 03</b></div>
+            <div class="judge-scanline"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIVE DATA RIBBON ================= -->
+    <div class="judge-data-ribbon" aria-label="Live showcase metrics">
+      <div class="judge-ribbon-item"><small>Food Waste (Today)</small><b>4.6 kg</b></div>
+      <div class="judge-ribbon-item"><small>Bin Fill (Highest)</small><b id="ribbonBinFill">87%</b></div>
+      <div class="judge-ribbon-item"><small>Sensor Health</small><b>5 / 5</b></div>
+      <div class="judge-ribbon-item"><small>Cora</small><b id="ribbonCora">ONLINE</b></div>
+    </div>
+
+    <!-- ================= DASHBOARD HOME ================= -->
+    <section id="dashboard" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Dashboard</span>
+        <h2>Good morning, Canteen Team</h2>
+        <p>Here's the current status of your smart canteen. <span class="tag tag-demo" style="margin-left:6px;">Demo Data</span></p>
+      </div>
+      <div class="kpi-grid">
+        <div class="card kpi-card">
+          <div class="label">Total Food Waste</div>
+          <div class="value"><span class="mono-num" data-count="24.8">0</span><span class="unit">kg</span></div>
+          <div class="kpi-foot">Cumulative, this week</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="label">Today's Waste</div>
+          <div class="value"><span class="mono-num" data-count="4.6">0</span><span class="unit">kg</span></div>
+          <div class="kpi-foot">Across all bins</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="label">Bin Fill Level</div>
+          <div class="value"><span class="mono-num" data-count="87">0</span><span class="unit">%</span></div>
+          <div class="kpi-foot" id="kpiFillFoot">Bin 03 — highest</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="label">Temperature</div>
+          <div class="value"><span class="mono-num" data-count="28.4">0</span><span class="unit">°C</span></div>
+          <div class="kpi-foot">Ambient, near bin</div>
+        </div>
+        <div class="card kpi-card">
+          <div class="label">System Status</div>
+          <div class="value status-online">● Online</div>
+          <div class="kpi-foot">All sensors reporting</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOD SAVED IMPACT ================= -->
+    <section id="food-impact" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Food Saved Impact</span>
+        <h2>Every gram has a story</h2>
+        <p>Cora turns the recorded waste total into a simple human message: roughly how many adult-meal equivalents that food represents.</p>
+      </div>
+      <div class="card food-impact-card">
+        <div class="food-impact-grid">
+          <div class="food-impact-main">
+            <div class="food-impact-eyebrow">Estimated meal-equivalent impact</div>
+            <div class="food-impact-big">
+              <b id="mealEquivalentPeople">7.7</b>
+              <span>adult meal-equivalents</span>
+            </div>
+            <div class="food-impact-sub">
+              Based on <b id="impactWasteGrams">4600 g</b> of recorded food waste.
+            </div>
+            <div class="food-impact-note">
+              <b>Think before you waste:</b> using the project's illustrative assumption of
+              <b>600 g ≈ one substantial adult meal</b>, the dashboard shows how much food
+              could have represented a meal. This is an awareness estimate, not a nutritional or food-safety guarantee.
+            </div>
+            <div class="food-impact-live-source">
+              <span class="live-dot"></span> LIVE SENSOR FEED
+              <small>Updated automatically from the smart-bin waste reading. No manual entry.</small>
+            </div>
+            <div class="food-impact-ticker" id="foodImpactTicker">
+              Waiting for the next ESP32 / HX711 waste reading…
+            </div>
+          </div>
+
+          <div class="food-impact-side">
+            <div class="food-impact-stat">
+              <small>Recorded waste</small>
+              <b id="impactWasteKg">4.60 kg</b>
+              <p>Today's running total</p>
+            </div>
+            <div class="food-impact-stat">
+              <small>Meal assumption</small>
+              <b>600 g</b>
+              <p>Illustrative adult meal-equivalent for the project demo</p>
+            </div>
+            <div class="food-impact-stat">
+              <small>Message from Cora</small>
+              <b id="impactCoraLine">Food matters. Take only what you need.</b>
+              <p>Displayed every time the waste total changes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIVE MONITORING ================= -->
+    <section id="live-monitoring" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Live Monitoring</span>
+        <h2>Live smart-bin status</h2>
+        <p>Real-time fill, weight and temperature reporting from each connected bin. Bin 01 is shown on the gauge as the monitored bin; Bin 03 carries the highest fill today.</p>
+      </div>
+      <div class="card bin-hero" id="binHeroCard">
+        <div class="gauge-wrap">
+          <svg width="200" height="200" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="86" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
+            <circle id="binGauge" cx="100" cy="100" r="86" stroke="#ffbf69" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="540.35" stroke-dashoffset="540.35"/>
+          </svg>
+          <div class="gauge-center">
+            <div class="pct" id="gaugePct">0%</div>
+            <div class="pct-label">Fill Level</div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+            <h3 style="font-size:16px; font-weight:700;">Bin 01</h3>
+            <span class="status-chip status-warning" id="binHeroStatus">● Warning</span>
+          </div>
+          <div class="bin-meta">
+            <div class="row"><div class="k">Fill Level</div><div class="v" id="binHeroFill">72%</div></div>
+            <div class="row"><div class="k">Weight</div><div class="v" id="binHeroWeight">4.6 kg</div></div>
+            <div class="row"><div class="k">Temperature</div><div class="v">28.4°C</div></div>
+            <div class="row"><div class="k">Last Reading</div><div class="v">12 sec ago</div></div>
+          </div>
+          <div class="legend-row">
+            <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6"></span>Normal · 0–60%</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#ffbf69"></span>Warning · 60–80%</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#ff5470"></span>Critical · 80–100%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- ================= PHYSICAL SYSTEM ================= -->
+    <section id="physical-system" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Hardware</span>
+        <h2>Physical system</h2>
+        <p>Sensors capture real-world canteen conditions and send them to the digital monitoring layer.</p>
+      </div>
+      <div class="prototype-split">
+        <div class="prototype-frame" style="min-height:340px; display:flex; align-items:center; justify-content:center;">
+          <div class="placeholder-note">Prototype photo not supplied — swap this frame for your actual build image.</div>
+          <svg width="70%" viewBox="0 0 240 260" fill="none">
+            <rect x="30" y="40" width="180" height="190" rx="10" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+            <rect x="46" y="58" width="148" height="40" rx="5" stroke="#22d3ee" stroke-width="1.4"/>
+            <rect x="80" y="150" width="80" height="60" rx="6" stroke="#8b5cf6" stroke-width="1.4"/>
+            <circle cx="120" cy="120" r="12" stroke="#ffbf69" stroke-width="1.4"/>
+            <line x1="30" y1="130" x2="0" y2="130" stroke="rgba(255,255,255,0.25)"/>
+            <line x1="210" y1="78" x2="240" y2="78" stroke="rgba(255,255,255,0.25)"/>
+          </svg>
+          <div class="callout-label" style="top:52px; left:8px;">LCD</div>
+          <div class="callout-label" style="top:105px; right:8px;">Ultrasonic Sensor</div>
+          <div class="callout-label" style="bottom:70px; left:8px;">Load Cell</div>
+          <div class="callout-label" style="bottom:40px; right:8px;">HX711</div>
+          <div class="callout-label" style="top:20px; left:50%; transform:translateX(-50%);">ESP32</div>
+        </div>
+        <div>
+          <div class="chip-row" style="margin-bottom:18px;">
+            <span class="chip">ESP32</span><span class="chip">Load Cell</span><span class="chip">HX711</span><span class="chip">Ultrasonic Sensor</span><span class="chip">Temperature Sensor</span><span class="chip">QR / RFID</span><span class="chip">LCD</span><span class="chip">LED / Buzzer</span>
+          </div>
+          <p style="color:var(--text-dim); font-size:14px;">Every reading on this dashboard originates from a physical measurement taken on the canteen floor — weight from the load cell, fill level from the ultrasonic sensor, and ambient conditions from the temperature sensor — relayed over Wi‑Fi by the ESP32.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DATA FLOW ================= -->
+    <section id="data-flow">
+      <div class="section-head">
+        <span class="eyebrow">Architecture</span>
+        <h2>Live data flow</h2>
+        <p>How a single waste event travels from the bin to a decision.</p>
+      </div>
+      <div class="card">
+        <div class="flow-row">
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 8h14l-1.5 11a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div><div class="name">Smart Bin</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:0s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div><div class="name">Sensors</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:.4s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg></div><div class="name">ESP32</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:.8s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13a5 5 0 0 1 9-3M8 17a3 3 0 0 0 0 6h9a4 4 0 0 0 1-7.9A5 5 0 0 0 8 17Z"/></svg></div><div class="name">Wi-Fi</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:1.2s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 22c2-6 6-9 9-9M11 22a9 9 0 0 1-9-9c0-6 6-11 9-11"/></svg></div><div class="name">CanteenIQ</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:1.6s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 13.5V8M9 13.5V4M15 13.5V6.5M21 13.5V10"/></svg></div><div class="name">Insights</div></div>
+          <div class="flow-connector"><div class="particle" style="animation-delay:2s;"></div></div>
+          <div class="flow-node"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg></div><div class="name">Action</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ANALYTICS ================= -->
+    <section id="analytics" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Analytics</span>
+        <h2>Waste analytics</h2>
+        <p>Patterns across the day and week. <span class="tag tag-demo" style="margin-left:6px;">Demo Data</span></p>
+      </div>
+      <div class="analytics-grid">
+        <div class="card chart-card">
+          <div class="chart-head"><h3>Daily waste (kg)</h3><span class="tag tag-demo" id="dailyRange">Illustrative demo data</span></div>
+          <canvas id="dailyChart" height="180"></canvas>
+        </div>
+        <div class="card chart-card">
+          <div class="chart-head"><h3>Weekly waste (kg)</h3><span class="tag tag-demo" id="weeklyRange">Illustrative demo data</span></div>
+          <canvas id="weeklyChart" height="180"></canvas>
+          <div class="peak-highlight">
+            <span style="font-size:12.5px; color:var(--text-dim);">Peak waste period</span>
+            <span class="time">1:00 – 2:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="chart-head"><h3>When is waste highest?</h3><span class="tag tag-demo">Sample</span></div>
+        <div class="heat-row">
+          <div class="heat-block" style="background:rgba(139,92,246,0.08); border-color:rgba(139,92,246,0.25);"><div class="label">Breakfast</div><div class="lvl" style="color:#8b5cf6;">Low</div></div>
+          <div class="heat-block" style="background:rgba(242,85,90,0.08); border-color:rgba(242,85,90,0.25);"><div class="label">Lunch</div><div class="lvl" style="color:var(--red);">High</div></div>
+          <div class="heat-block" style="background:rgba(242,169,60,0.08); border-color:rgba(242,169,60,0.25);"><div class="label">Evening</div><div class="lvl" style="color:var(--amber);">Moderate</div></div>
+        </div>
+        <p style="margin-top:14px; font-size:12.5px; color:var(--text-faint);">Historical measurements can help identify recurring waste peaks.</p>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="chart-head"><h3>Which bin needs attention?</h3><span class="tag tag-demo">Live snapshot</span></div>
+        <table>
+          <thead><tr><th>Bin</th><th>Fill</th><th>Weight</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Bin 01</td><td>72%</td><td>4.6 kg</td><td><span class="status-chip status-warning">Warning</span></td></tr>
+            <tr><td>Bin 02</td><td>43%</td><td>2.1 kg</td><td><span class="status-chip status-normal">Normal</span></td></tr>
+            <tr class="critical"><td>Bin 03</td><td>87%</td><td>5.8 kg</td><td><span class="status-chip status-critical">Critical</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= ALERTS ================= -->
+    <section id="alerts" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Alert Center</span>
+        <h2>Alerts & thresholds</h2>
+        <p>Every alert carries a timestamp, severity, bin number and a recommended action.</p>
+      </div>
+      <div class="card">
+        <div class="alert-item">
+          <span class="alert-sev" style="background:var(--red);"></span>
+          <div class="alert-body">
+            <div class="alert-top"><span class="alert-title">Critical: Bin 03 requires attention — 87% full</span><span class="alert-time">2 min ago</span></div>
+            <div class="alert-action"><b>Recommended action:</b> Prioritize collection</div>
+          </div>
+        </div>
+        <div class="alert-item">
+          <span class="alert-sev" style="background:var(--amber);"></span>
+          <div class="alert-body">
+            <div class="alert-top"><span class="alert-title">Bin 01 reached Level 2 — Warning</span><span class="alert-time">18 min ago</span></div>
+            <div class="alert-action"><b>Recommended action:</b> Schedule a check within the shift</div>
+          </div>
+        </div>
+        <div class="alert-item">
+          <span class="alert-sev" style="background:var(--cyan);"></span>
+          <div class="alert-body">
+            <div class="alert-top"><span class="alert-title">Temperature reading changed</span><span class="alert-time">41 min ago</span></div>
+            <div class="alert-action"><b>Recommended action:</b> No action needed, within normal range</div>
+          </div>
+        </div>
+        <div class="alert-item">
+          <span class="alert-sev" style="background:#8b5cf6;"></span>
+          <div class="alert-body">
+            <div class="alert-top"><span class="alert-title">System connection stable</span><span class="alert-time">1 hr ago</span></div>
+            <div class="alert-action"><b>Recommended action:</b> None</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="level-scale">
+        <div class="level-block" style="border-color:rgba(139,92,246,0.3);"><div class="n">Level 1</div><div class="t" style="color:#8b5cf6;">Normal</div><div class="r">0–60%</div></div>
+        <div class="level-block" style="border-color:rgba(242,169,60,0.3);"><div class="n">Level 2</div><div class="t" style="color:var(--amber);">Warning</div><div class="r">60–80%</div></div>
+        <div class="level-block" style="border-color:rgba(242,85,90,0.3);"><div class="n">Level 3</div><div class="t" style="color:var(--red);">Critical</div><div class="r">80–95%</div></div>
+        <div class="level-block" style="border-color:rgba(242,85,90,0.5);"><div class="n">Level 4</div><div class="t" style="color:var(--red);">Full</div><div class="r">95–100%</div></div>
+      </div>
+      <p style="margin-top:12px; font-size:12px; color:var(--text-faint);">Thresholds are configurable demonstration values.</p>
+    </section>
+
+    <!-- ================= SENSOR MONITORING ================= -->
+    <section id="sensors">
+      <div class="section-head">
+        <span class="eyebrow">Hardware</span>
+        <h2>Sensor monitoring</h2>
+        <p>Each input feeding the system, and what it measures.</p>
+      </div>
+      <div class="sensor-grid">
+        <div class="card sensor-card"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 15h16l-1 5H5l-1-5Z"/><path d="M4 15 6 8h12l2 7"/></svg></div><div class="name">Load Cell</div><div class="desc">Food waste weight</div></div>
+        <div class="card sensor-card"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="9" width="18" height="6" rx="1.5"/><path d="M7 9V7M12 9V7M17 9V7"/></svg></div><div class="name">HX711</div><div class="desc">Weight signal interface</div></div>
+        <div class="card sensor-card"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 0 1 18 0M7 12a5 5 0 0 1 10 0M11 12a1 1 0 1 0 2 0"/></svg></div><div class="name">Ultrasonic</div><div class="desc">Bin fill estimation</div></div>
+        <div class="card sensor-card"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 14V5a2 2 0 1 1 4 0v9a4 4 0 1 1-4 0Z"/></svg></div><div class="name">Temperature</div><div class="desc">Environmental monitoring</div></div>
+        <div class="card sensor-card"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h2M14 8h2M8 14h2M14 14h2"/></svg></div><div class="name">QR / RFID</div><div class="desc">Session interaction</div></div>
+      </div>
+    </section>
+
+    <!-- ================= ESP32 CONTROL PANEL ================= -->
+    <section id="esp32">
+      <div class="section-head">
+        <span class="eyebrow">Control Layer</span>
+        <h2>ESP32 — the brain of the system</h2>
+        <p>How raw sensor signals are turned into a status the dashboard can show.</p>
+      </div>
+      <div class="card esp-diagram">
+        <div class="esp-col">
+          <div class="col-title">Inputs</div>
+          <div class="esp-item">Load Cell + HX711</div>
+          <div class="esp-item">Ultrasonic Sensor</div>
+          <div class="esp-item">Temperature Sensor</div>
+          <div class="esp-item">QR / RFID</div>
+        </div>
+        <div class="esp-center">
+          <svg class="chip" viewBox="0 0 24 24" fill="none" stroke="#22d3ee"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+          <b>ESP32</b>
+          <span>Calibration · Fill calculation · Threshold logic · Status detection</span>
+        </div>
+        <div class="esp-col">
+          <div class="col-title">Outputs</div>
+          <div class="esp-item">LCD</div>
+          <div class="esp-item">LED / Buzzer</div>
+          <div class="esp-item">Wi-Fi</div>
+          <div class="esp-item">Dashboard</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STUDENT ACTIVITY ================= -->
+    <section id="student-activity">
+      <div class="section-head">
+        <span class="eyebrow">Student Activity</span>
+        <h2>Student interaction</h2>
+        <p>Anonymous session IDs can connect a user interaction with a waste event while minimizing unnecessary personal information. No student is publicly identified or singled out.</p>
+      </div>
+      <div class="card">
+        <div class="strip">
+          <div class="strip-step">Scan QR / RFID</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Session</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Waste Event</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Measurement</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Feedback</div>
+        </div>
+      </div>
+
+      <div class="feedback-grid">
+        <div class="card feedback-card">
+          <div class="name">Portion Size</div>
+          <div class="chip-row"><span class="chip">Too much</span><span class="chip">Good</span><span class="chip">Too little</span></div>
+        </div>
+        <div class="card feedback-card">
+          <div class="name">Menu Preference</div>
+          <div class="chip-row"><span class="chip">Favorite dishes</span></div>
+        </div>
+        <div class="card feedback-card">
+          <div class="name">Waste Reason</div>
+          <div class="chip-row"><span class="chip">Portion too large</span><span class="chip">Didn't like the item</span><span class="chip">Took too much</span><span class="chip">Other</span></div>
+        </div>
+      </div>
+    </section>
+<!-- ================= ECO POINTS ================= -->
+    <section id="eco-points">
+      <div class="section-head">
+        <span class="eyebrow">Eco Points</span>
+        <h2>Less waste, more points — everyone wins</h2>
+        <p>A positive, non-punitive way to build better habits.</p>
+      </div>
+      <div class="card eco-grid">
+        <div>
+          <div class="eco-points">850<span class="of"> / 1000</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:85%;"></div></div>
+          <span class="badge">Eco Champion</span>
+        </div>
+        <div class="strip" style="justify-content:flex-start;">
+          <div class="strip-step">Less Waste</div><span class="strip-arrow">→</span>
+          <div class="strip-step">More Awareness</div><span class="strip-arrow">→</span>
+          <div class="strip-step">More Eco Points</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Better Habits</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DECISION SUPPORT ================= -->
+    <section id="decision-support">
+      <div class="section-head">
+        <span class="eyebrow">Decision Support</span>
+        <h2>Four questions this dashboard answers</h2>
+      </div>
+      <div class="decision-grid">
+        <div class="card decision-card"><div class="q">What is happening now?</div><div class="a">Live sensor status</div></div>
+        <div class="card decision-card"><div class="q">Which bin needs attention?</div><div class="a">Fill-level alert</div></div>
+        <div class="card decision-card"><div class="q">When is waste highest?</div><div class="a">Historical trends</div></div>
+        <div class="card decision-card"><div class="q">Did the intervention work?</div><div class="a">Before / after comparison</div></div>
+      </div>
+
+      <div class="before-after" style="margin-top:18px;">
+        <div class="card ba-card">
+          <span class="ba-tag" style="color:var(--red);">Before Intervention</span>
+          <canvas id="beforeChart" height="140"></canvas>
+        </div>
+        <div class="card ba-card">
+          <span class="ba-tag" style="color:#8b5cf6;">After Intervention</span>
+          <canvas id="afterChart" height="140"></canvas>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:12px; color:var(--text-faint);">Illustrative / demo data. Actual improvement should be established through real measurements.</p>
+    </section>
+
+    <!-- ================= MENU VOTING ================= -->
+    <section id="menu-voting">
+      <div class="section-head">
+        <span class="eyebrow">Student Activity</span>
+        <h2>Menu voting</h2>
+      </div>
+      <div class="card">
+        <div class="strip">
+          <div class="strip-step">Vote</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Preference Data</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Consumption</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Waste Data</div><span class="strip-arrow">→</span>
+          <div class="strip-step">Better Menu Planning</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= AI PREP OPTIMIZER ================= -->
+    <section id="prep-optimizer" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Demand Intelligence</span>
+        <h2>AI Menu Demand Predictor</h2>
+        <p>Turns menu preferences and historical waste patterns into a practical preparation recommendation. Current figures are illustrative demo inputs until connected to verified canteen records.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Today's Prep-Optimizer</h3>
+          <div class="feature-muted">Menu item · Rice · Tuesday sample pattern</div>
+          <div class="feature-stat" id="prepRecommendation">Cook 15% less</div>
+          <p class="feature-muted" id="prepReason">Historical sample: 25% of prepared rice is left over on Tuesdays. Menu preference votes are used as a demand signal.</p>
+          <div class="feature-kpis">
+            <div class="feature-kpi"><small>Projected waste avoided</small><b id="prepWasteSaved">3.2 kg</b></div>
+            <div class="feature-kpi"><small>Estimated cost saving</small><b id="prepMoneySaved">₹480</b></div>
+            <div class="feature-kpi"><small>Menu interest</small><b id="prepVoteCount">64 votes</b></div>
+          </div>
+          <div class="feature-actions">
+            <button class="feature-btn primary" id="recalculatePrep">Recalculate forecast</button>
+            <button class="feature-btn" id="addMenuVote">+ Add sample vote</button>
+          </div>
+          <p class="feature-muted" style="margin-top:10px">Planning aid only: staff should review the forecast against attendance, stock and food-safety requirements before changing batch sizes.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Menu demand signals</h3>
+          <p class="feature-muted">Sample preference distribution for today's menu.</p>
+          <p style="margin-top:14px;font-size:12px">Rice · <b id="riceVoteLabel">64%</b></p>
+          <div class="feature-progress"><span id="riceVoteBar" style="width:64%"></span></div>
+          <p style="font-size:12px">Dal · <b>78%</b></p><div class="feature-progress"><span style="width:78%"></span></div>
+          <p style="font-size:12px">Vegetables · <b>52%</b></p><div class="feature-progress"><span style="width:52%"></span></div>
+          <p style="font-size:12px">Roti · <b>86%</b></p><div class="feature-progress"><span style="width:86%"></span></div>
+          <div class="drawer-status">Decision loop: Historical waste + menu votes + expected attendance → recommended preparation quantity.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOD ROUTING ================= -->
+    <section id="food-routing" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Circular Food System</span>
+        <h2>Food-to-Impact Router</h2>
+        <p>Separates untouched surplus from plate leftovers. Redistribution is considered only for food that has remained safely handled and meets the canteen's food-safety checks.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Waste stream classification</h3>
+          <table class="feature-table">
+            <thead><tr><th>Stream</th><th>Handling route</th><th>Sample</th></tr></thead>
+            <tbody>
+              <tr><td>Untouched surplus</td><td>Safety check → eligible donation</td><td>3.5 kg</td></tr>
+              <tr><td>Plate leftovers</td><td>Organic compost / approved digester</td><td>12.0 kg</td></tr>
+              <tr><td>Unsafe / spoiled</td><td>Isolated → approved disposal</td><td>0.8 kg</td></tr>
+            </tbody>
+          </table>
+          <div class="feature-actions">
+            <button class="feature-btn primary" id="routeSurplus">Run surplus safety check</button>
+            <button class="feature-btn" id="routeCompost">Log compost batch</button>
+          </div>
+          <div class="drawer-status" id="routingStatus">Awaiting a routing action. Sample quantities are demonstration data.</div>
+        </div>
+        <div class="feature-card">
+          <h3>Today's circular impact</h3>
+          <div class="feature-kpis">
+            <div class="feature-kpi"><small>Compost input</small><b id="compostKg">12.0 kg</b></div>
+            <div class="feature-kpi"><small>Surplus checked</small><b id="surplusKg">3.5 kg</b></div>
+            <div class="feature-kpi"><small>Biogas route</small><b id="biogasKg">0.0 kg</b></div>
+          </div>
+          <p class="feature-muted" style="margin-top:14px">The dashboard records a proposed route; actual donation, composting or biogas processing must be confirmed by the receiving partner or facility.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOSTEL LEADERBOARD ================= -->
+    <section id="hostel-leaderboard" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Positive Behaviour Change</span>
+        <h2>Hostel vs Hostel Waste Battle</h2>
+        <p>Encourages collective improvement through per-person waste rates, Eco Points and recognition—not public shaming of individual students.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Campus leaderboard</h3>
+          <table class="feature-table">
+            <thead><tr><th>Rank</th><th>Hostel</th><th>Waste / person</th><th>Eco Points</th></tr></thead>
+            <tbody id="hostelRankRows">
+              <tr><td>1</td><td>Hostel A</td><td>0.12 kg</td><td>920</td></tr>
+              <tr><td>2</td><td>Hostel C</td><td>0.19 kg</td><td>810</td></tr>
+              <tr><td>3</td><td>Hostel B</td><td>0.28 kg</td><td>690</td></tr>
+            </tbody>
+          </table>
+          <div class="feature-actions"><button class="feature-btn primary" id="refreshHostelBoard">Refresh sample rankings</button><button class="feature-btn" id="awardEcoPoints">Award demo Eco Points</button></div>
+        </div>
+        <div class="feature-card">
+          <h3>Weekly campus challenge</h3>
+          <div class="feature-stat" id="hostelWinner">Hostel A leads</div>
+          <p class="feature-muted">Reward idea: bonus Eco Points, canteen vouchers or a campus sustainability certificate, subject to college approval.</p>
+          <div class="feature-kpis">
+            <div class="feature-kpi"><small>Leading rate</small><b id="hostelLeadingRate">0.12 kg</b></div>
+            <div class="feature-kpi"><small>Challenge points</small><b id="hostelChallengePoints">920</b></div>
+            <div class="feature-kpi"><small>Challenge period</small><b>7 days</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ROI TICKER ================= -->
+    <section id="roi-ticker" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Administrator View</span>
+        <h2>Financial & Carbon ROI</h2>
+        <p>Translates measured waste reduction into understandable financial and environmental indicators. Values below use editable project assumptions and are not verified impact claims.</p>
+      </div>
+      <div class="roi-strip">
+        <div class="roi-tile"><small>Estimated food cost avoided</small><b id="roiMoney">₹480</b><span class="feature-muted">Projection from today's prep forecast</span></div>
+        <div class="roi-tile"><small>Estimated CO₂e avoided</small><b id="roiCarbon">8.0 kg</b><span class="feature-muted">Using 2.5 kg CO₂e per kg food-waste assumption</span></div>
+        <div class="roi-tile"><small>Food waste avoided</small><b id="roiWaste">3.2 kg</b><span class="feature-muted">Prep-optimizer sample forecast</span></div>
+      </div>
+      <p class="feature-muted" style="margin-top:12px">Calculation assumptions: ₹150 per kg food and 2.5 kg CO₂e per kg food waste. Replace these with locally validated values before reporting institutional savings or emissions reductions.</p>
+    </section>
+
+    <!-- ================= FUTURE AI ================= -->
+    <section id="future-ai" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Future Scope</span>
+        <h2>What's next for CanteenIQ</h2>
+        <p>Not yet implemented. Shown here to illustrate direction. <span class="tag tag-future" style="margin-left:6px;">Future Scope</span></p>
+      </div>
+      <div class="future-grid">
+        <div class="card future-card"><div class="name">AI Food Assessment</div><div class="future-flow">Camera → AI → Food Recognition → Waste Analysis</div></div>
+        <div class="card future-card"><div class="name">Demand Prediction</div><div class="future-flow">Waste Data + Menu + Attendance → Prediction → Better Planning</div></div>
+        <div class="card future-card"><div class="name">Smart Feedback</div><div class="future-flow">Waste Pattern → AI Recommendation → Student Action</div></div>
+        <div class="card future-card"><div class="name">Freshness Intelligence</div><div class="future-flow">Temperature + Time + Validated Sensors → Insight</div></div>
+        <div class="card future-card"><div class="name">Predictive Collection</div><div class="future-flow">Historical Fill Rate → Predicted Critical Time → Planned Collection</div></div>
+      </div>
+    </section>
+
+    <!-- ================= SUSTAINABILITY ================= -->
+    <section id="sustainability" class="judge-section-glow">
+      <div class="section-head">
+        <span class="eyebrow">Impact</span>
+        <h2>Sustainability impact</h2>
+      </div>
+      <div class="pillar-grid">
+        <div class="card pillar-card"><div class="name">Environment</div><p style="font-size:13px; color:var(--text-dim);">Better understanding of food waste and resource loss.</p></div>
+        <div class="card pillar-card"><div class="name">Operations</div><p style="font-size:13px; color:var(--text-dim);">Better visibility and faster response.</p></div>
+        <div class="card pillar-card"><div class="name">Students</div><p style="font-size:13px; color:var(--text-dim);">Awareness, participation and positive behavior.</p></div>
+      </div>
+      <div class="tag-cloud">
+        <span class="chip">Sustainability</span><span class="chip">Smart Technology</span><span class="chip">Social Impact</span><span class="chip">Education</span><span class="chip">Automation</span>
+      </div>
+    </section>
+
+    <!-- ================= PROJECT PERFORMANCE ================= -->
+    <section id="performance">
+      <div class="section-head">
+        <span class="eyebrow">Project Status</span>
+        <h2>Project performance</h2>
+        <p>Honest status — no fabricated percentages.</p>
+      </div>
+      <div class="perf-grid">
+        <div class="card perf-card"><div class="name">Waste Measurement</div><div class="state">Awaiting pilot data</div></div>
+        <div class="card perf-card"><div class="name">Fill-Level Monitoring</div><div class="state">Awaiting pilot data</div></div>
+        <div class="card perf-card"><div class="name">Alert Reliability</div><div class="state">Awaiting pilot data</div></div>
+        <div class="card perf-card"><div class="name">Data Reliability</div><div class="state">Awaiting pilot data</div></div>
+        <div class="card perf-card"><div class="name">System Uptime</div><div class="state">Awaiting pilot data</div></div>
+      </div>
+    </section>
+
+    <!-- ================= LIVE SYSTEM STATUS ================= -->
+    <section id="settings">
+      <div class="section-head">
+        <span class="eyebrow">System</span>
+        <h2>Live system status</h2>
+      </div>
+      <div class="card sys-grid">
+        <div class="sys-item"><span class="name">ESP32</span><span class="state"><span class="dot"></span>Online</span></div>
+        <div class="sys-item"><span class="name">Load Cell</span><span class="state"><span class="dot"></span>Connected</span></div>
+        <div class="sys-item"><span class="name">Ultrasonic</span><span class="state"><span class="dot"></span>Connected</span></div>
+        <div class="sys-item"><span class="name">Temperature</span><span class="state"><span class="dot"></span>Connected</span></div>
+        <div class="sys-item"><span class="name">Wi-Fi</span><span class="state"><span class="dot"></span>Stable</span></div>
+        <div class="sys-item"><span class="name">Dashboard</span><span class="state"><span class="dot"></span>Online</span></div>
+      </div>
+    </section>
+
+    <!-- ================= RESPONSIBLE DESIGN ================= -->
+    <section id="responsible-design">
+      <div class="section-head">
+        <span class="eyebrow">Responsible Design</span>
+        <h2>What this system does — and doesn't — claim</h2>
+      </div>
+      <div class="resp-grid">
+        <div class="card resp-card resp-can">
+          <div style="font-size:13.5px; font-weight:600; margin-bottom:2px;">What our system can do</div>
+          <ul>
+            <li>Measure selected physical parameters</li>
+            <li>Monitor configured thresholds</li>
+            <li>Provide operational data</li>
+            <li>Support future analytics</li>
+          </ul>
+        </div>
+        <div class="card resp-card resp-cannot">
+          <div style="font-size:13.5px; font-weight:600; margin-bottom:2px;">What it does not claim</div>
+          <ul>
+            <li>Temperature alone does not prove food safety</li>
+            <li>Sensor readings do not certify freshness</li>
+            <li>Future donation workflows require safety verification</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DECISION LOOP ================= -->
+    <section id="decision-loop">
+      <div class="section-head">
+        <span class="eyebrow">Method</span>
+        <h2>The smart decision loop</h2>
+      </div>
+      <div class="card loop-wrap">
+        <svg width="360" height="360" viewBox="0 0 360 360">
+          <circle cx="180" cy="180" r="140" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="none" stroke-dasharray="6 8"/>
+          <g font-family="Space Grotesk" font-size="14" font-weight="600" fill="#e9efee" text-anchor="middle">
+            <text x="180" y="46">Measure</text>
+            <text x="314" y="184">Understand</text>
+            <text x="180" y="322">Act</text>
+            <text x="46" y="184">Improve</text>
+          </g>
+          <circle cx="180" cy="70" r="5" fill="#22d3ee"/>
+          <circle cx="290" cy="180" r="5" fill="#22d3ee"/>
+          <circle cx="180" cy="290" r="5" fill="#8b5cf6"/>
+          <circle cx="70" cy="180" r="5" fill="#8b5cf6"/>
+          <path d="M180 70a110 110 0 0 1 110 110" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M290 180a110 110 0 0 1 -110 110" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M180 290a110 110 0 0 1 -110 -110" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M70 180a110 110 0 0 1 110 -110" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <text x="180" y="184" text-anchor="middle" font-family="Space Grotesk" font-size="12" fill="#65787a">Measure again</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ================= PROTOTYPE + WEBSITE ================= -->
+    <section id="split-hero">
+      <div class="card split-hero">
+        <div class="split-side"><div class="tag-label">Physical</div><h3 style="font-size:17px; font-weight:700;">Actual Prototype</h3></div>
+        <div class="split-center"><b>Physical Data → Digital Intelligence</b><span>We sense the physical world, convert it into data, and use that data to drive smarter campus decisions.</span></div>
+        <div class="split-side" style="text-align:right;"><div class="tag-label">Digital</div><h3 style="font-size:17px; font-weight:700;">CanteenIQ Dashboard</h3></div>
+      </div>
+    </section>
+
+    <!-- ================= FINAL ================= -->
+    <section id="final" style="margin-bottom:0;">
+      <div class="final-hero">
+        <div class="line1">From food waste</div>
+        <h2>To <span class="accent">smart decisions</span></h2>
+        <p>Measure. Understand. Act Smarter.</p>
+
+        <div class="bin-demo-wrap">
+          <div class="bin-demo-head">
+            <div>
+              <div class="bin-demo-title">Judge Demo — Simulate Bin Full</div>
+              <div class="bin-demo-sub">Triggers the smart-bin critical state, in-page warning notification, emergency alert and a Cora voice warning.</div>
+            </div>
+            <div class="bin-demo-actions">
+              <button class="bin-demo-btn" id="simulateBinFull">Simulate Bin Full</button>
+              <button class="bin-demo-reset" id="resetBinDemo">Reset</button>
+            </div>
+          </div>
+          <div class="bin-demo-note">Demo only: this simulates the ESP32 + ultrasonic sensor detecting a 100% fill condition. Audio starts only after the button click, which is a browser-safe user gesture.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>CanteenIQ — IoT-powered food-waste intelligence for smarter, more sustainable campuses.</span>
+  <span>Demo build · values marked "Demo Data" are illustrative</span>
+</footer>
+<!-- ================= CORA FIRST-RUN GATE ================= -->
+<div class="cora-activate" id="coraActivate">
+  <div class="cora-activate-card">
+    <div class="cora-activate-orb">✦</div>
+    <h2>Cora is ready</h2>
+    <p>Choose Cora's language first. Then start Cora for spoken greeting, daily analysis, and voice commands.</p>
+    <label class="cora-language-label" for="coraLanguage">Language</label>
+    <select class="cora-language" id="coraLanguage" aria-label="Cora language">
+      <option value="en-US">English · Browser voice</option>
+      <option value="hi-IN">हिन्दी · Browser voice</option>
+      <option value="hinglish">Hinglish · Natural Indian conversation</option>
+    </select>
+    <button class="cora-activate-btn" id="coraActivateBtn">Start Cora</button>
+    <div class="cora-activate-note">Flow: "Hello Boss" → greeting → full daily analysis → "Do you need anything, sir?" → voice command mode.</div>
+  </div>
+</div>
+
+<!-- ================= EMERGENCY OVERLAY ================= -->
+<div class="cora-emergency-overlay" id="coraEmergencyOverlay">
+  <div class="cora-emergency-card">
+    <h2>EMERGENCY</h2>
+    <div class="big" id="emergencyBinName">BIN 01 FULL</div>
+    <p id="emergencyBinCapacity">CAPACITY: 100%</p>
+    <p>IMMEDIATE COLLECTION REQUIRED</p>
+    <button id="ackEmergency">ACKNOWLEDGE</button>
+  </div>
+</div>
+
+<!-- ================= CORA PROACTIVE ================= -->
+<div class="cora-proactive" id="coraProactive" role="status" aria-live="polite">
+  <strong id="coraProactiveTitle">Cora detected a change</strong>
+  <span id="coraProactiveText">Monitoring dashboard conditions.</span>
+</div>
+
+<!-- ================= JUDGE DEMO BUTTON ================= -->
+<button class="judge-demo-btn" id="judgeDemoBtn">JUDGE DEMO MODE</button>
+
+<!-- ================= CORA AI ASSISTANT PANEL ================= -->
+<div class="cora-panel" id="coraPanel" aria-hidden="true">
+  <div class="cora-head">
+    <div class="cora-title">
+      <div class="cora-mini">✦</div>
+      <div><strong>Cora</strong><small>Canteen Operations & Response Assistant</small></div>
+    </div>
+    <button class="cora-close" id="coraClose" aria-label="Close Cora">×</button>
+  </div>
+
+  <div class="cora-command" id="coraCommand">
+    <div class="cora-live-top">
+      <div class="cora-live-orb" id="coraLiveOrb"><div class="cora-orb-core">CORA<small>LIVE AI</small></div></div>
+      <div class="cora-live-info"><b>Cora Command Center</b><p>Canteen Operations & Response Assistant · Premium Intelligence</p><div class="cora-online" id="coraSystemOnline">● SYSTEM ONLINE</div></div>
+    </div>
+    <div class="cora-watch"><strong id="coraWatchTitle">Cora is monitoring 5 sensors</strong><span id="coraWatchLine"> ESP32 connected · Temperature stable · Monitoring bin levels</span></div>
+    <div class="cora-reason"><h4>Cora Recommendation</h4><div id="coraRecommendation">Prioritize collection of Bin 03 before the next peak period.</div><div class="cora-reason-grid"><div>FILL<b id="reasonFill">87%</b></div><div>RISK<b id="reasonRisk">CRITICAL</b></div><div>PREDICTION<b id="reasonPrediction">~15 min</b></div></div></div>
+    <div class="cora-ops-grid" id="coraOpsGrid">
+      <div class="cora-mini-card"><span>💰</span><div><small>EST. SAVING</small><b id="coraSaving">₹1,000/wk</b></div></div>
+      <div class="cora-mini-card"><span>📡</span><div><small>SENSOR HEALTH</small><b id="coraHealth">5/5 ONLINE</b></div></div>
+      <div class="cora-mini-card"><span>⏱</span><div><small>NEXT CHECK</small><b id="coraNextCheck">~15 min</b></div></div>
+    </div>
+    <div class="cora-command-actions">
+      <button data-cora="What should I do now?">What now?</button>
+      <button data-cora="Give me the cost saving report">Cost saving</button>
+      <button data-cora="Check sensor health">Sensor health</button>
+      <button data-cora="Predict the next 30 minutes">Next 30 min</button>
+      <button id="coraExportReport">Export report</button>
+    </div>
+    <div class="cora-thought" id="coraThought"><span>◌</span> Reading sensor data... <span>◌</span> Comparing thresholds...</div>
+  </div>
+
+  <div class="cora-messages" id="coraMessages">
+    <div class="cora-msg ai">Hello. I'm <b>Cora</b>. I can read the dashboard's current metrics, alerts, bin status, analytics and system status. Ask me for a <b>daily update</b> or anything about the dashboard.</div>
+  </div>
+
+  <div class="cora-quick">
+    <button data-cora="Give me today's daily update">Daily update</button>
+    <button data-cora="Which bin needs attention?">Bin attention</button>
+    <button data-cora="Show system status">System status</button>
+    <button data-cora="Go to analytics">Analytics</button>
+  </div>
+
+  <div class="cora-instant-wrap" aria-label="Instant commands">
+    <div class="cora-instant-title"><strong>Instant Commands</strong><span>Tap to ask Cora</span></div>
+    <div class="cora-instant-grid">
+      <button data-cora="Give me today's daily update">📋 Daily</button>
+      <button data-cora="How much food waste is there today?">♻️ Waste</button>
+      <button data-cora="What is the current bin status?">🗑️ Bin</button>
+      <button data-cora="When will the bin become full?">⏱️ Predict</button>
+      <button data-cora="Check all sensor health">📡 Sensors</button>
+      <button data-cora="What should I do right now?">🧠 What now?</button>
+      <button data-cora="Show me today's alerts">🚨 Alerts</button>
+      <button data-cora="Give me the cost saving report">💰 Savings</button>
+      <button data-cora="Show sustainability impact">🌱 Impact</button>
+      <button data-cora="Why is food waste increasing?">📈 Trend</button>
+      <button data-cora="Should we collect the bin now?">🚚 Collect</button>
+      <button data-cora="Go to analytics">📊 Analytics</button>
+    </div>
+  </div>
+
+  <div class="cora-voice-compat" id="coraVoiceCompat" aria-live="polite">🎙 Voice works best in Chrome/Edge on HTTPS or localhost. Text commands always remain available.</div>
+  <div class="cora-state" id="coraState">Ready · Dashboard access active</div>
+  <div class="cora-input">
+    <button class="cora-btn" id="coraMic" title="Voice input">🎙</button>
+    <input id="coraInput" placeholder="Ask Cora…" autocomplete="off" />
+    <button class="cora-btn primary" id="coraSend" title="Send">➤</button>
+  </div>
+</div>
+
+<!-- ================= BIN FULL ALERT ================= -->
+<div class="bin-full-alert" id="binFullAlert" role="alert" aria-live="assertive">
+  <div class="bin-full-alert-row">
+    <div class="bin-full-alert-icon">⚠️</div>
+    <div style="flex:1">
+      <strong id="binAlertTitle">BIN 01 FULL — IMMEDIATE ACTION REQUIRED</strong>
+      <p id="binAlertText">Fill level has reached 100%. Please stop adding waste and empty the bin.</p>
+    </div>
+    <button class="bin-full-alert-close" id="binAlertClose" aria-label="Close warning">×</button>
+  </div>
+  <div class="bin-full-alert-meta" id="binAlertMeta">Sensor event · Ultrasonic sensor · Critical threshold</div>
+</div>
+
+
+<button class="judge-drawer-launch" id="judgeDrawerLaunch" aria-expanded="false">⚡ Judge Controls</button>
+<aside class="judge-drawer" id="judgeDrawer" aria-label="Judge interactive simulation panel">
+  <div class="judge-drawer-head"><h3>Live Judge Simulator</h3><button class="judge-drawer-close" id="judgeDrawerClose">Close</button></div>
+  <p class="feature-muted">Trigger controlled demo events to show how CanteenIQ responds. These are simulations, not live sensor readings.</p>
+  <button class="drawer-action" id="judgeOverflow">Simulate 100% Overflow<span>Sets bin fill to critical and triggers the existing emergency alert.</span></button>
+  <button class="drawer-action" id="judgeWasteDrop">Inject Heavy Waste Drop (+1.5 kg)<span>Updates food-waste totals and meal-equivalent indicators.</span></button>
+  <button class="drawer-action" id="judgeGasTrigger">Trigger Gas Threshold (Spoilage)<span>Shows a simulated gas-threshold warning and Cora notification.</span></button>
+  <button class="drawer-action" id="judgeReset">Reset demo state<span>Dismisses the demo alert and restores the bin simulation.</span></button>
+  <div class="drawer-status" id="judgeDrawerStatus">Ready · Select a scenario to begin.</div>
+</aside>
+
+<button class="cora-fab" id="coraFab" aria-label="Open Cora"><div class="cora-orb"><span></span></div></button>
+<script>
+  /* ==================================================================
+     FOOD IMPACT TRACKER · Script 1 of 3
+     (Previously rendered as raw body text — never executed. Fixed.)
+     ================================================================== */
+  'use strict';
+
+  (function initFoodImpact(){
+    const FOOD_MEAL_GRAMS = 600; // project/demo assumption supplied by the user
+    const FOOD_STORAGE_KEY = 'canteenIQFoodImpact_v1';
+
+    function todayKey(){
+      return new Date().toISOString().slice(0,10);
+    }
+
+    function readFoodImpactStore(){
+      try{
+        const raw=JSON.parse(localStorage.getItem(FOOD_STORAGE_KEY)||'{}');
+        const key=todayKey();
+        return {
+          date:key,
+          baseWasteKg:Number(raw.date===key ? raw.baseWasteKg : 4.6) || 4.6,
+          baseTotalKg:Number(raw.date===key ? raw.baseTotalKg : 24.8) || 24.8,
+          addedWasteGrams:Number(raw.date===key ? raw.addedWasteGrams : 0) || 0
+        };
+      }catch(e){
+        return {date:todayKey(),baseWasteKg:4.6,baseTotalKg:24.8,addedWasteGrams:0};
+      }
+    }
+
+    let foodImpactStore=readFoodImpactStore();
+
+    function saveFoodImpactStore(){
+      try{ localStorage.setItem(FOOD_STORAGE_KEY,JSON.stringify(foodImpactStore)); }catch(e){}
+    }
+
+    function currentTodayWasteGrams(){
+      return Math.max(0,(foodImpactStore.baseWasteKg*1000)+foodImpactStore.addedWasteGrams);
+    }
+    function currentTotalWasteKg(){
+      return Math.max(0, foodImpactStore.baseTotalKg + (foodImpactStore.addedWasteGrams/1000));
+    }
+
+    function normalizeLabel(label){
+      return String(label||'').toLowerCase().replace(/\s+/g,' ').trim();
+    }
+
+    function setMetricByLabel(label, value, unit){
+      const needle=normalizeLabel(label);
+      const cards=[...document.querySelectorAll('#dashboard .kpi-card')];
+      const card=cards.find(c=>{
+        const labelText=normalizeLabel(c.querySelector('.label')?.textContent||'');
+        return needle && (labelText===needle || labelText.includes(needle) || needle.includes(labelText));
+      });
+      const valueEl=card?.querySelector('.value .mono-num');
+      if(valueEl){
+        valueEl.textContent=String(value);
+        valueEl.dataset.count=String(value);
+      }
+      if(unit && card?.querySelector('.unit')) card.querySelector('.unit').textContent=unit;
+      return valueEl;
+    }
+
+    function updateWasteDisplays(){
+      const grams=currentTodayWasteGrams();
+      const kg=grams/1000;
+      const mealEq=grams/FOOD_MEAL_GRAMS;
+      const full=Math.floor(mealEq);
+      const remainder=Math.max(0,Math.round(grams-full*FOOD_MEAL_GRAMS));
+
+      setMetricByLabel('Total Food Waste', currentTotalWasteKg().toFixed(2), 'kg');
+      setMetricByLabel('Today', kg.toFixed(2), 'kg');
+
+      const ribbon=[...document.querySelectorAll('.judge-ribbon-item')].find(x=>/Food Waste/i.test(x.textContent));
+      if(ribbon?.querySelector('b')) ribbon.querySelector('b').textContent=kg.toFixed(2)+' kg';
+
+      const heroChip=[...document.querySelectorAll('.judge-chip')].find(x=>/WASTE TODAY/i.test(x.textContent));
+      if(heroChip?.querySelector('b')) heroChip.querySelector('b').textContent=kg.toFixed(2)+' kg';
+
+      const weightRow=[...document.querySelectorAll('#live-monitoring .bin-meta .row')].find(r=>/Weight/i.test(r.textContent));
+      if(weightRow?.querySelector('.v')) weightRow.querySelector('.v').textContent=kg.toFixed(2)+' kg';
+
+      const impactKg=document.getElementById('impactWasteKg');
+      const impactGrams=document.getElementById('impactWasteGrams');
+      const impactEq=document.getElementById('mealEquivalentPeople');
+      if(impactKg) impactKg.textContent=kg.toFixed(2)+' kg';
+      if(impactGrams) impactGrams.textContent=Math.round(grams)+' g';
+      if(impactEq) impactEq.textContent=mealEq.toFixed(1);
+
+      const line=document.getElementById('impactCoraLine');
+      if(line){
+        if(mealEq < 1) line.textContent='Take what you need. Every gram matters.';
+        else if(full===1) line.textContent='That is about one substantial meal-equivalent.';
+        else line.textContent=`That is roughly ${full} full meal-equivalents${remainder?` + ${remainder} g toward another`:''}.`;
+      }
+      const ticker=document.getElementById('foodImpactTicker');
+      if(ticker){
+        ticker.textContent=`Updated just now · ${Math.round(grams)} g recorded · ≈ ${mealEq.toFixed(1)} meal-equivalents · 600 g/meal assumption`;
+      }
+      saveFoodImpactStore();
+
+      const todayCard=[...document.querySelectorAll('#dashboard .kpi-card')].find(c=>normalizeLabel(c.querySelector('.label')?.textContent||'')==='today\'s waste');
+      const totalCard=[...document.querySelectorAll('#dashboard .kpi-card')].find(c=>normalizeLabel(c.querySelector('.label')?.textContent||'')==='total food waste');
+      if(todayCard?.querySelector('.mono-num')) todayCard.querySelector('.mono-num').dataset.count=kg.toFixed(2);
+      if(totalCard?.querySelector('.mono-num')) totalCard.querySelector('.mono-num').dataset.count=currentTotalWasteKg().toFixed(2);
+    }
+
+    function recordFoodWaste(grams, source='smart-bin'){
+      const g=Math.round(Number(grams));
+      if(!Number.isFinite(g) || g<=0) return false;
+      foodImpactStore.addedWasteGrams += g;
+      updateWasteDisplays();
+      const totalGrams=currentTodayWasteGrams();
+      const mealEq=totalGrams/FOOD_MEAL_GRAMS;
+      const msg=document.getElementById('foodImpactTicker');
+      if(msg) msg.textContent=`Live update · +${g} g received from ${source} · today ${Math.round(totalGrams)} g · ≈ ${mealEq.toFixed(1)} meal-equivalents`;
+      document.dispatchEvent(new CustomEvent('canteenIQ:foodWasteRecorded',{detail:{grams:g,totalGrams,mealEquivalents:mealEq,source}}));
+      return true;
+    }
+
+    function ingestHardwareWaste(grams, meta={}){
+      return recordFoodWaste(grams, meta.source || 'ESP32 / HX711');
+    }
+
+    window.CanteenIQFoodImpact={
+      recordFoodWaste,
+      ingestHardwareWaste,
+      getStats:()=>({
+        todayWasteGrams:currentTodayWasteGrams(),
+        todayWasteKg:currentTodayWasteGrams()/1000,
+        totalWasteKg:currentTotalWasteKg(),
+        mealEquivalents:currentTodayWasteGrams()/FOOD_MEAL_GRAMS,
+        mealAssumptionGrams:FOOD_MEAL_GRAMS,
+        dataSource:'live smart-bin feed',
+        manualEntry:false
+      }),
+      getTodayWasteKg:()=> currentTodayWasteGrams()/1000,
+      refresh:updateWasteDisplays
+    };
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      updateWasteDisplays();
+    });
+
+    // Bridge for an ESP32/cloud wrapper that posts waste events to the page.
+    window.addEventListener('message',(event)=>{
+      const data=event?.data;
+      if(!data || data.type!=='CANTEENIQ_WASTE_RECORDED') return;
+      ingestHardwareWaste(data.grams,{source:data.source||'ESP32 / HX711'});
+    });
+  })();
+</script>
+<script>
+  /* ==================================================================
+     BIN DEMO + NAV + KPI + GAUGE + CHARTS · Script 2 of 3
+     ================================================================== */
+  'use strict';
+
+  /* ---------- JUDGE DEMO: BIN FULL + EMERGENCY SIREN + CORA WARNING ---------- */
+  (function initBinFullDemo(){
+    const simulateBtn=document.getElementById('simulateBinFull');
+    const resetBtn=document.getElementById('resetBinDemo');
+    const alertBox=document.getElementById('binFullAlert');
+    const alertClose=document.getElementById('binAlertClose');
+    const alertTitle=document.getElementById('binAlertTitle');
+    const alertText=document.getElementById('binAlertText');
+    const alertMeta=document.getElementById('binAlertMeta');
+    const gauge=document.getElementById('binGauge');
+    const gaugePct=document.getElementById('gaugePct');
+    const binHero=document.getElementById('binHeroCard');
+    const binStatus=binHero?.querySelector('.status-chip');
+    const fillCell=[...document.querySelectorAll('.bin-meta .row')].find(r=>/Fill Level/i.test(r.querySelector('.k')?.textContent||''));
+    const weightCell=[...document.querySelectorAll('.bin-meta .row')].find(r=>/Weight/i.test(r.querySelector('.k')?.textContent||''));
+    const tempCell=[...document.querySelectorAll('.bin-meta .row')].find(r=>/Temperature/i.test(r.querySelector('.k')?.textContent||''));
+    const lastCell=[...document.querySelectorAll('.bin-meta .row')].find(r=>/Last Reading/i.test(r.querySelector('.k')?.textContent||''));
+    const kpiFill=[...document.querySelectorAll('.kpi-card')].find(c=>/Bin Fill Level/i.test(c.querySelector('.label')?.textContent||''));
+    const kpiMono=kpiFill?.querySelector('.mono-num');
+    const kpiFoot=kpiFill?.querySelector('.kpi-foot');
+    const ribbonFill=document.getElementById('ribbonBinFill');
+    const heroChipFill=document.getElementById('heroChipFill');
+    const circumference=2*Math.PI*86;
+
+    // Shared state so the Cora command center always knows the demo target bin.
+    window.__binDemoState={active:false,bin:'Bin 01',fill:72};
+
+    function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+    async function emergencySiren(){
+      try{
+        const AC=window.AudioContext||window.webkitAudioContext;
+        if(!AC) return;
+        const ctx=window.__coraSirenCtx||(window.__coraSirenCtx=new AC());
+        if(ctx.state==='suspended') await ctx.resume();
+        if(window.__coraSirenStop) window.__coraSirenStop();
+        const gain=ctx.createGain();
+        const o1=ctx.createOscillator(); const o2=ctx.createOscillator();
+        o1.type='sawtooth'; o2.type='triangle';
+        o1.connect(gain); o2.connect(gain); gain.connect(ctx.destination);
+        gain.gain.setValueAtTime(0.0001,ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.16,ctx.currentTime+0.05);
+        const started=performance.now(); let raf=0;
+        const sweep=()=>{
+          const t=(performance.now()-started)/1000; const cyc=t%1.0;
+          const phase=cyc<0.5?cyc/0.5:(1-cyc)/0.5;
+          const f=560+phase*820;
+          o1.frequency.setTargetAtTime(f,ctx.currentTime,0.03);
+          o2.frequency.setTargetAtTime(f*0.5,ctx.currentTime,0.03);
+          raf=requestAnimationFrame(sweep);
+        };
+        sweep(); o1.start(); o2.start();
+        const stop=()=>{
+          cancelAnimationFrame(raf);
+          try{gain.gain.setTargetAtTime(0.0001,ctx.currentTime,0.06);}catch(e){}
+          setTimeout(()=>{try{o1.stop();}catch(e){} try{o2.stop();}catch(e){}},220);
+          window.__coraSirenStop=null;
+        };
+        window.__coraSirenStop=stop;
+        setTimeout(stop,6000);
+      }catch(e){}
+    }
+
+    function setText(row,value){ if(row&&row.querySelector('.v')) row.querySelector('.v').textContent=value; }
+
+    function localWarning(){
+      const hi=localStorage.getItem('coraLanguage')==='hi-IN';
+      if(hi){
+        return {
+          title:'BIN 01 FULL — तुरंत कार्रवाई ज़रूरी',
+          text:'Bin 01 पूरी तरह भर गया है। कृपया अभी waste डालना बंद करें और bin को empty करें।',
+          meta:'Sensor event · Ultrasonic sensor · Critical threshold',
+          speech:'ध्यान दीजिए Boss. Bin zero one पूरी तरह भर गया है। Fill level one hundred percent है। कृपया waste डालना बंद करें और bin को तुरंत खाली करें।'
+        };
+      }
+      return {
+        title:'BIN 01 FULL — IMMEDIATE ACTION REQUIRED',
+        text:'Bin 01 has reached 100% capacity. Please stop adding waste and empty the bin immediately.',
+        meta:'Sensor event · Ultrasonic sensor · Critical threshold',
+        speech:'Attention Boss. Bin zero one is full. The fill level has reached one hundred percent. Please stop adding waste and empty the bin immediately.'
+      };
+    }
+
+    function trigger(){
+      document.body.classList.add('bin-demo-active');
+      alertBox?.classList.add('show');
+      window.dispatchEvent(new Event('cora:emergency'));
+      const w=localWarning();
+      if(alertTitle) alertTitle.textContent=w.title;
+      if(alertText) alertText.textContent=w.text;
+      if(alertMeta) alertMeta.textContent=w.meta;
+
+      window.__binDemoState={active:true,bin:'Bin 01',fill:100};
+
+      if(gauge){
+        gauge.style.stroke='#ff5470';
+        gauge.style.strokeDashoffset='0';
+      }
+      if(gaugePct) gaugePct.textContent='100%';
+      if(binStatus){
+        binStatus.textContent='● Critical';
+        binStatus.className='status-chip status-critical';
+      }
+      setText(fillCell,'100%');
+      setText(weightCell,'6.4 kg');
+      setText(lastCell,'just now');
+
+      if(kpiMono){
+        kpiMono.textContent='100';
+        kpiMono.dataset.count='100';
+        kpiMono.dataset.demoOverride='true';
+      }
+      if(kpiFoot) kpiFoot.textContent='Bin 01 — emergency';
+      if(ribbonFill) ribbonFill.textContent='100%';
+      if(heroChipFill) heroChipFill.textContent='100% · FULL';
+
+      emergencySiren();
+
+      setTimeout(()=>{
+        try{
+          if(window.Cora){
+            window.Cora.open?.(false);
+            window.Cora.speak?.(w.speech,()=>{
+              document.getElementById('coraState')?.scrollIntoView?.({block:'nearest'});
+            });
+          }
+        }catch(e){}
+      },180);
+    }
+
+    function restoreWeightText(){
+      const today=window.CanteenIQFoodImpact?.getTodayWasteKg ? window.CanteenIQFoodImpact.getTodayWasteKg() : 4.6;
+      return (Number.isFinite(today)?today:4.6).toFixed(2)+' kg';
+    }
+
+    function reset(){
+      document.body.classList.remove('bin-demo-active');
+      alertBox?.classList.remove('show');
+      window.__binDemoState={active:false,bin:'Bin 01',fill:72};
+      if(gauge){
+        gauge.style.stroke='#ffbf69';
+        gauge.style.strokeDashoffset=circumference-(72/100)*circumference;
+      }
+      if(gaugePct) gaugePct.textContent='72%';
+      if(binStatus){
+        binStatus.textContent='● Warning';
+        binStatus.className='status-chip status-warning';
+      }
+      setText(fillCell,'72%');
+      setText(weightCell,restoreWeightText());
+      setText(tempCell,'28.4°C');
+      setText(lastCell,'12 sec ago');
+      if(kpiMono){
+        kpiMono.textContent='87';
+        kpiMono.dataset.count='87';
+        delete kpiMono.dataset.demoOverride;
+      }
+      if(kpiFoot) kpiFoot.textContent='Bin 03 — highest';
+      if(ribbonFill) ribbonFill.textContent='87%';
+      if(heroChipFill) heroChipFill.textContent='87% · CRITICAL';
+      if('speechSynthesis' in window) speechSynthesis.cancel();
+    }
+
+    simulateBtn?.addEventListener('click',trigger);
+    resetBtn?.addEventListener('click',reset);
+    alertClose?.addEventListener('click',()=>alertBox?.classList.remove('show'));
+  })();
+
+  /* ---------- ACTIVE NAV LINK ON SCROLL ---------- */
+  (function initNav(){
+    const links=document.querySelectorAll('.nav-link');
+    const sections=['dashboard','live-monitoring','analytics','alerts','eco-points','student-activity','future-ai','settings'].map(id=>document.getElementById(id));
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          links.forEach(l=>l.classList.remove('active'));
+          const match=document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+          if(match) match.classList.add('active');
+        }
+      });
+    },{rootMargin:'-40% 0px -50% 0px'});
+    sections.forEach(s=>{ if(s) io.observe(s); });
+    document.getElementById('mobileMenuBtn')?.addEventListener('click',()=>{
+      document.getElementById('sidebar')?.classList.toggle('open');
+    });
+  })();
+
+  /* ---------- KPI COUNT-UP ---------- */
+  (function initKpiCounters(){
+    function animateCount(el){
+      const target=parseFloat(el.dataset.count)||0;
+      const isDecimal=(el.dataset.count||'').includes('.');
+      let start=0;
+      const duration=1100;
+      const startTime=performance.now();
+      function step(now){
+        const p=Math.min((now-startTime)/duration,1);
+        const eased=1-Math.pow(1-p,3);
+        const val=target*eased;
+        el.textContent=isDecimal?val.toFixed(1):Math.round(val);
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    document.querySelectorAll('[data-count]').forEach(animateCount);
+  })();
+
+  /* ---------- BIN GAUGE FILL ---------- */
+  (function initGauge(){
+    const gauge=document.getElementById('binGauge');
+    const gaugePct=document.getElementById('gaugePct');
+    if(!gauge||!gaugePct) return;
+    const circumference=2*Math.PI*86;
+    const targetPct=72;
+    let raf=0;
+    function cancel(){ cancelAnimationFrame(raf); }
+    function animate(){
+      const start=performance.now();
+      function stepGauge(now){
+        const p=Math.min((now-start)/1300,1);
+        const eased=1-Math.pow(1-p,3);
+        const cur=targetPct*eased;
+        gauge.style.strokeDashoffset=circumference-(cur/100)*circumference;
+        gaugePct.textContent=Math.round(cur)+'%';
+        if(p<1) raf=requestAnimationFrame(stepGauge);
+      }
+      raf=requestAnimationFrame(stepGauge);
+    }
+    gauge.style.strokeDashoffset=circumference;
+    window.addEventListener('load',()=>setTimeout(animate,80));
+  })();
+
+  /* ---------- CANVAS CHARTS (deterministic demo data) ---------- */
+  (function initCharts(){
+    function drawLine(id,data,color){
+      const c=document.getElementById(id);
+      if(!c) return;
+      const ctx=c.getContext('2d');
+      const w=c.width=c.offsetWidth; const h=c.height=c.getAttribute('height')*1||180;
+      ctx.clearRect(0,0,w,h);
+      const max=Math.max(...data)*1.2;
+      const pad=10;
+      const stepX=(w-2*pad)/(data.length-1);
+      ctx.beginPath();
+      data.forEach((v,i)=>{
+        const x=pad+i*stepX;
+        const y=h-pad-(v/max)*(h-2*pad);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.strokeStyle=color; ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.stroke();
+      const grad=ctx.createLinearGradient(0,0,0,h);
+      grad.addColorStop(0,color+'33'); grad.addColorStop(1,color+'00');
+      ctx.lineTo(pad+(data.length-1)*stepX,h-pad); ctx.lineTo(pad,h-pad); ctx.closePath();
+      ctx.fillStyle=grad; ctx.fill();
+    }
+    function roundRectPath(ctx,x,y,w,h,r){
+      r=Math.min(r,w/2,h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+r,y);
+      ctx.arcTo(x+w,y,x+w,y+h,r);
+      ctx.arcTo(x+w,y+h,x,y+h,r);
+      ctx.arcTo(x,y+h,x,y,r);
+      ctx.arcTo(x,y,x+w,y,r);
+      ctx.closePath();
+    }
+    function drawBars(id,data,color,labels){
+      const c=document.getElementById(id);
+      if(!c) return;
+      const ctx=c.getContext('2d');
+      const w=c.width=c.offsetWidth; const h=c.height=c.getAttribute('height')*1||180;
+      ctx.clearRect(0,0,w,h);
+      const max=Math.max(...data)*1.2;
+      const pad=10;
+      const gap=10;
+      const bw=(w-2*pad-gap*(data.length-1))/data.length;
+      data.forEach((v,i)=>{
+        const x=pad+i*(bw+gap);
+        const bh=(v/max)*(h-2*pad-16);
+        const y=h-pad-bh-16;
+        ctx.fillStyle=color;
+        if(ctx.roundRect) ctx.roundRect(x,y,bw,bh,4);
+        else roundRectPath(ctx,x,y,bw,bh,4);
+        ctx.fill();
+        if(labels){
+          ctx.fillStyle='#7d76a8'; ctx.font='10px Inter'; ctx.textAlign='center';
+          ctx.fillText(labels[i],x+bw/2,h-4);
+        }
+      });
+    }
+
+    // Fixed, reproducible demo series (no Math.random — stable for judges).
+    const demoDaily=[0.10,0.15,0.25,0.30,0.40,0.60,0.85,1.30,0.55,0.20];
+    const demoWeekly=[3.4,3.1,3.6,3.9,4.9,3.2,2.7];
+
+    function renderAnalytics(){
+      drawLine('dailyChart',demoDaily,'#22d3ee');
+      drawBars('weeklyChart',demoWeekly,'#8b5cf6',['Mon','Tue','Wed','Thu','Fri','Sat','Sun']);
+      drawLine('beforeChart',[3,3.4,3.9,4.6,5.1,5.4],'#ff5470');
+      drawLine('afterChart',[3,2.6,2.1,1.8,1.5,1.3],'#8b5cf6');
+      const end=new Date(); const start=new Date(end); start.setDate(end.getDate()-6);
+      const fmt=d=>d.toLocaleDateString(undefined,{day:'2-digit',month:'short'});
+      const daily=document.getElementById('dailyRange');
+      const weekly=document.getElementById('weeklyRange');
+      if(daily) daily.textContent='Demo · '+fmt(end);
+      if(weekly) weekly.textContent=fmt(start)+' – '+fmt(end);
+    }
+    window.addEventListener('load',()=>setTimeout(renderAnalytics,40));
+    let analyticsResizeTimer=0;
+    window.addEventListener('resize',()=>{
+      clearTimeout(analyticsResizeTimer);
+      analyticsResizeTimer=setTimeout(renderAnalytics,120);
+    });
+  })();
+</script>
+<script>
+  /* ==================================================================
+     CORA · DASHBOARD-AWARE VOICE ASSISTANT · Script 3 of 3
+     ================================================================== */
+  'use strict';
+
+  (function initCora(){
+    const panel=document.getElementById('coraPanel');
+    const fab=document.getElementById('coraFab');
+    const close=document.getElementById('coraClose');
+    const messages=document.getElementById('coraMessages');
+    const input=document.getElementById('coraInput');
+    const send=document.getElementById('coraSend');
+    const mic=document.getElementById('coraMic');
+    const state=document.getElementById('coraState');
+    const API_URL=window.CORA_API_URL || '';
+    const AI_API_URL=window.CORA_AI_URL || '';
+    let lastProcessedTranscript='';
+    let lastProcessedAt=0;
+    let responseSequence=0;
+
+    // The Cora Command Center now lives INSIDE the panel (fixed markup).
+    // Guard kept so a malformed layout never re-moves it.
+    const premiumPanel=document.getElementById('coraCommand');
+    if(panel && premiumPanel && !panel.contains(premiumPanel)){
+      const header=panel.querySelector('.cora-head');
+      if(header) header.insertAdjacentElement('afterend',premiumPanel);
+      premiumPanel.classList.add('open');
+    }
+
+    let recognition=null;
+    let autoBriefingStarted=false;
+    let speaking=false;
+    let processingCommand=false;
+    let activated=false;
+    let hasActivatedFlag=localStorage.getItem('coraActivated')==='true';
+    let selectedLanguage=localStorage.getItem('coraLanguage') || 'en-US';
+    const languageSelect=document.getElementById('coraLanguage');
+    if(languageSelect) languageSelect.value=selectedLanguage;
+    const activateOverlay=document.getElementById('coraActivate');
+    const activateBtn=document.getElementById('coraActivateBtn');
+
+    function openCora(focus=true){
+      panel.classList.add('open');
+      premiumPanel?.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      if(focus) setTimeout(()=>input.focus(),100);
+    }
+    function closeCora(){
+      try{ responseSequence++; }catch(e){}
+      try{
+        if('speechSynthesis' in window){
+          speechSynthesis.cancel();
+          speechSynthesis.pause?.();
+          setTimeout(()=>{ try{ speechSynthesis.cancel(); speechSynthesis.resume?.(); }catch(e){} },0);
+        }
+      }catch(e){}
+      speaking=false;
+      processingCommand=false;
+      panel.classList.remove('open');
+      premiumPanel?.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      stopListening();
+      if(state) state.textContent='Cora closed';
+    }
+    fab.addEventListener('click',()=>{
+      if(!hasActivatedFlag){
+        autoBriefingStarted=false;
+        activated=false;
+        panel.setAttribute('aria-hidden','true');
+        activateOverlay?.classList.remove('hidden');
+        if(languageSelect){
+          const saved=localStorage.getItem('coraLanguage');
+          languageSelect.value=(saved==='en-US'||saved==='hi-IN'||saved==='hinglish')?saved:'en-US';
+        }
+        return;
+      }
+      openCora();
+    });
+    close.addEventListener('click',closeCora);
+
+    function escapeHtml(value){
+      return String(value??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+    function addMsg(text,who='ai',allowHtml=true){
+      const d=document.createElement('div');
+      d.className='cora-msg '+who;
+      d.innerHTML=(who==='user'||!allowHtml)?escapeHtml(text):String(text);
+      messages.appendChild(d);
+      messages.scrollTop=messages.scrollHeight;
+    }
+    function cleanText(el){ return el?el.textContent.trim():'—'; }
+    function num(selector){
+      const el=typeof selector==='string'?document.querySelector(selector):selector;
+      return cleanText(el);
+    }
+
+    function dashboardSnapshot(){
+      const binRows=[...document.querySelectorAll('#analytics tbody tr')].map(r=>{
+        const c=r.querySelectorAll('td');
+        return c.length?{bin:cleanText(c[0]),fill:cleanText(c[1]),weight:cleanText(c[2]),status:cleanText(c[3])}:null;
+      }).filter(Boolean);
+      const alerts=[...document.querySelectorAll('#alerts .alert-item')].map(r=>({
+        title:cleanText(r.querySelector('.alert-title')),
+        time:cleanText(r.querySelector('.alert-time')),
+        action:cleanText(r.querySelector('.alert-action'))
+      }));
+      const system=[...document.querySelectorAll('#settings .sys-item')].map(r=>({
+        name:cleanText(r.querySelector('.name')),state:cleanText(r.querySelector('.state'))
+      }));
+      const stats=window.CanteenIQFoodImpact?.getStats ? window.CanteenIQFoodImpact.getStats() : null;
+      return {
+        totalWaste:stats?stats.totalWasteKg.toFixed(2):num('[data-count="24.8"]'),
+        todayWaste:stats?stats.todayWasteKg.toFixed(2):num('[data-count="4.6"]'),
+        fill:num('[data-count="87"]'),
+        temperature:num('[data-count="28.4"]'),
+        impactMealEquivalents:stats?stats.mealEquivalents:0,
+        impactWasteGrams:stats?stats.todayWasteGrams:0,
+        bins:binRows,alerts,system
+      };
+    }
+
+    async function fetchLiveData(){
+      if(!API_URL) return null;
+      try{
+        const r=await fetch(API_URL,{headers:{'Accept':'application/json'}});
+        if(!r.ok) throw new Error('API '+r.status);
+        return await r.json();
+      }catch(e){
+        state.textContent='Ready · Using dashboard values';
+        return null;
+      }
+    }
+
+    function timeGreeting(){
+      const h=new Date().getHours();
+      if(h<12) return 'Good morning';
+      if(h<17) return 'Good afternoon';
+      return 'Good evening';
+    }
+
+    function dailyBriefingText(d){
+      const critical=(d.bins||[]).find(x=>/critical/i.test(x.status));
+      const warning=(d.bins||[]).find(x=>/warning/i.test(x.status));
+      const normal=(d.bins||[]).filter(x=>/normal/i.test(x.status)).length;
+      const alerts=(d.alerts||[]).length;
+      if(selectedLanguage==='hi-IN'){
+        let spoken=`Hello Boss. ${timeGreeting()==='Good morning'?'सुप्रभात':'नमस्कार'}. यह आपका CanteenIQ दैनिक विश्लेषण है। `;
+        spoken+=`आज का दर्ज किया गया food waste ${d.todayWaste} kilogram है और इस सप्ताह का कुल waste ${d.totalWaste} kilogram है। `;
+        spoken+=`सबसे अधिक displayed bin fill level ${d.fill} percent है और current displayed temperature ${d.temperature} degree Celsius है। `;
+        if(critical) spoken+=`${critical.bin} ${critical.fill} percent भरा है और critical है, इसलिए collection को प्राथमिकता दें। `;
+        else if(warning) spoken+=`${warning.bin} ${warning.fill} percent पर warning में है, इसलिए इसे check करना चाहिए। `;
+        else spoken+='अभी किसी bin पर critical या warning status नहीं है। ';
+        if(normal) spoken+=`${normal} bin अभी normal status में ${normal===1?'है':'हैं'}। `;
+        spoken+=`Alert center में ${alerts} recent system event${alerts===1?'':'s'} हैं। `;
+        spoken+='ESP32, sensors, Wi-Fi और dashboard अभी online या connected दिख रहे हैं। ';
+        spoken+=`Aaj ka waste roughly ${((parseFloat(String(d.todayWaste).replace(/[^0-9.]/g,''))*1000)/600).toFixed(1)} adult meal-equivalents represent karta hai, using the project demo assumption of 600 grams per meal. `;
+        spoken+='ध्यान दें: यह सिर्फ awareness estimate है, nutrition या food-safety guarantee नहीं। Demo Data या Sample से marked values illustrative हैं, जब तक live hardware connect नहीं होता। ';
+        spoken+='Do you need anything, sir?';
+        return spoken;
+      }
+      let spoken=`Hello Boss. ${timeGreeting()}. Here is your CanteenIQ daily briefing. `;
+      spoken+=`Today's recorded food waste is ${d.todayWaste} kilograms, with ${d.totalWaste} kilograms accumulated this week. `;
+      spoken+=`The highest displayed bin fill level is ${d.fill} percent, and the current displayed temperature is ${d.temperature} degrees Celsius. `;
+      if(critical) spoken+=`${critical.bin} is at ${critical.fill} and is marked critical, so collection should be prioritized. `;
+      else if(warning) spoken+=`${warning.bin} is at ${warning.fill} and is currently on warning, so it should be checked. `;
+      else spoken+='There are no critical or warning bins in the current dashboard view. ';
+      if(normal) spoken+=`${normal} bin${normal===1?' is':'s are'} currently marked normal. `;
+      spoken+=`The alert center shows ${alerts} recent system event${alerts===1?'':'s'}. `;
+      spoken+='The dashboard currently shows the ESP32, sensors, Wi-Fi and dashboard as online or connected. ';
+      spoken+=`At today's recorded waste level, that is roughly ${((parseFloat(String(d.todayWaste).replace(/[^0-9.]/g,''))*1000)/600).toFixed(1)} adult meal-equivalents using the project's illustrative 600 gram assumption. `;
+      spoken+='This is only an awareness estimate, not a nutrition or food-safety guarantee. ';
+      spoken+='Please note that values marked Demo Data or Sample are illustrative until live hardware is connected. ';
+      spoken+='Do you need anything, sir?';
+      return spoken;
+    }
+    function briefingHtml(d){
+      const critical=(d.bins||[]).find(x=>/critical/i.test(x.status));
+      const warning=(d.bins||[]).find(x=>/warning/i.test(x.status));
+      const alerts=(d.alerts||[]).length;
+      if(selectedLanguage==='hi-IN'){
+        let out=`<b>Hello Boss.</b> ${timeGreeting()==='Good morning'?'सुप्रभात':'नमस्कार'}.<br><br><b>आज का CanteenIQ विश्लेषण</b><br>`;
+        out+=`• आज का food waste: <b>${d.todayWaste} kg</b><br>`;
+        out+=`• इस सप्ताह का कुल waste: <b>${d.totalWaste} kg</b><br>`;
+        out+=`• Highest bin fill: <b>${d.fill}%</b><br>`;
+        out+=`• Temperature: <b>${d.temperature}°C</b><br>`;
+        if(critical) out+=`• <b>Priority:</b> ${critical.bin} <b>${critical.fill}</b> पर Critical है — collection prioritize करें।<br>`;
+        else if(warning) out+=`• <b>Watch:</b> ${warning.bin} <b>${warning.fill}</b> पर Warning है।<br>`;
+        out+=`• Alerts: <b>${alerts}</b> recent system event${alerts===1?'':'s'}<br>`;
+        out+=`• System: <b>ESP32, sensors, Wi-Fi और dashboard online/connected दिख रहे हैं</b><br>`;
+        out+=`• Food impact: <b>${(parseFloat(String(d.todayWaste).replace(/[^0-9.]/g,''))*1000/600).toFixed(1)} adult meal-equivalents</b> represented by today's recorded waste.<br><br>`;
+        out+=`<span style="color:var(--cyan)">Do you need anything, sir?</span>`;
+        if(!API_URL) out+=`<br><br><span style="color:var(--text-faint)">Demo/Data note: values illustrative हैं जब तक live hardware/API data connect नहीं होता।</span>`;
+        return out;
+      }
+      let out=`<b>Hello Boss.</b> ${timeGreeting()}.<br><br><b>Today's CanteenIQ briefing</b><br>`;
+      out+=`• Food waste today: <b>${d.todayWaste} kg</b><br>`;
+      out+=`• Waste this week: <b>${d.totalWaste} kg</b><br>`;
+      out+=`• Highest bin fill: <b>${d.fill}%</b><br>`;
+      out+=`• Temperature: <b>${d.temperature}°C</b><br>`;
+      if(critical) out+=`• <b>Priority:</b> ${critical.bin} is <b>${critical.fill}</b> and Critical — prioritize collection.<br>`;
+      else if(warning) out+=`• <b>Watch:</b> ${warning.bin} is at <b>${warning.fill}</b> and Warning.<br>`;
+      out+=`• Alerts: <b>${alerts}</b> recent system event${alerts===1?'':'s'}<br>`;
+      out+=`• System: <b>ESP32, sensors, Wi-Fi and dashboard shown online/connected</b><br>`;
+      out+=`• Food impact: <b>${(parseFloat(String(d.todayWaste).replace(/[^0-9.]/g,''))*1000/600).toFixed(1)} adult meal-equivalents</b> represented by today's recorded waste.<br><br>`;
+      out+=`<span style="color:var(--cyan)">Do you need anything, sir?</span>`;
+      if(!API_URL) out+=`<br><br><span style="color:var(--text-faint)">Demo/Data note: dashboard values are illustrative until live hardware/API data is connected.</span>`;
+      return out;
+    }
+    function normalizeCommand(q){
+      return String(q||'')
+        .normalize('NFKC')
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}%₹$€£\s'?-]/gu,' ')
+        .replace(/\s+/g,' ')
+        .trim()
+        .replace(/^(hey|hello|hi|okay|ok|please|cora|boss|hey cora|cora please)\s+/i,'');
+    }
+
+    function understandCommand(q){
+      const x=normalizeCommand(q);
+      const specs={
+        greeting:{words:['hello','hi','hey','namaste','नमस्ते','नमस्कार','good morning','good afternoon','good evening']},
+        daily:{words:['daily','briefing','summary','overall update','status update','today update','दैनिक','आज का अपडेट','सारांश','स्थिति बताओ']},
+        waste:{words:['waste','wastage','wasted','food waste','leftover','खाना बर्बाद','बर्बादी','कितना कचरा','खाद्य अपशिष्ट','waste कितना','waste kitna']},
+        bin:{words:['bin','dustbin','trash can','garbage bin','fill level','capacity','भरा','भराव','कूड़ेदान','डस्टबिन','कितना भरा','kitna bhara']},
+        collection:{words:['collect','collection','empty','pickup','pick up','clear the bin','खाली','उठाना','निकालना','कब खाली','kab khali','kab collect','ले जाना']},
+        prediction:{words:['predict','prediction','forecast','when will it be full','how long until full','fill soon','कब भरेगा','कितनी देर में भरेगा','kab bharega','kitne time mein full','next full']},
+        system:{words:['sensor','sensors','esp32','wifi','wi-fi','connection','connected','online','offline','hardware health','system health','सेंसर','कनेक्शन','नेटवर्क','सिस्टम ठीक','system theek']},
+        temperature:{words:['temperature','temp','hot','heat','तापमान','गर्मी','temperature कितना']},
+        alerts:{words:['alert','alerts','warning','critical','issue','problem','alarm','चेतावनी','अलर्ट','समस्या','दिक्कत']},
+        analytics:{words:['analytics','analysis','trend','trends','chart','graph','peak time','pattern','डेटा विश्लेषण','ट्रेंड','चार्ट','ग्राफ']},
+        saving:{words:['save money','saving','cost','cost saving','money saved','financial','rupees lost','पैसा','बचत','कितना खर्च','money कितना']},
+        sustainability:{words:['sustainability','environment','eco','green','impact','carbon','पर्यावरण','इको','हरित','प्रभाव']},
+        foodImpact:{words:['how many people','how many meals','meal equivalent','meal equivalents','people could eat','feed people','how much food could feed','kitne log','kitne logo','kitne meal','kitni meals','khabar kitne logo','कितने लोग','कितने भोजन','कितनी प्लेट','meal equivalent']},
+        action:{words:['what should i do','what do i do','what now','next step','next action','recommend','recommendation','suggest','best action','अब क्या करें','क्या करना चाहिए','क्या करूं','agla step','ab kya','kya karna hai']},
+        navigation:{words:['open','go to','take me to','show dashboard','show analytics','खोलो','दिखाओ','ले चलो','जाओ']}
+      };
+      const scores={};
+      for(const [intent,c] of Object.entries(specs)){
+        let score=0;
+        for(const w of c.words){
+          const phrase=w.toLowerCase();
+          if(x.includes(phrase)) score+=phrase.includes(' ')?4:2;
+        }
+        scores[intent]=score;
+      }
+      if(/\bwhen|how long|soon|kab|कब|कितनी देर|kitne time\b/.test(x)) scores.prediction+=2;
+      if(/\bwhy|reason|because|kyun|क्यों|किस वजह/.test(x)) scores.analytics+=1;
+      if(/\bdo we need|should we|shall we|karna chahiye|करना चाहिए/.test(x)) scores.action+=2;
+      if(/\bhow much|kitna|कितना|कितने\b/.test(x)){ scores.waste+=1; scores.bin+=1; scores.saving+=1; }
+      const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+      const best=ranked[0];
+      return {text:x,intent:(best&&best[1]>=2)?best[0]:'unknown',confidence:best?.[1]||0,scores};
+    }
+    const detectIntent=q=>understandCommand(q).intent;
+
+    function answerLocal(q,d){
+      const u=understandCommand(q), intent=u.intent, hi=selectedLanguage==='hi-IN', hinglish=selectedLanguage==='hinglish';
+      const fill=parseFloat(String(d.fill).replace('%',''))||0;
+      const bins=d.bins||[];
+      const critical=bins.find(b=>/critical/i.test(b.status));
+      const warning=bins.find(b=>/warning/i.test(b.status));
+      const target=critical||warning||bins[0];
+      window.__coraContext={intent,lastQuestion:q,confidence:u.confidence};
+      if(intent==='greeting') return hi?'नमस्ते Boss. Cora तैयार है। अपना सवाल पूछिए।':hinglish?'Namaste Boss. Cora ready hai. Jo poochna hai naturally poochho.':'Hello Boss. Cora is ready. Ask your question.';
+      if(intent==='daily') return briefingHtml(d);
+      if(intent==='waste') return hi?`आज का recorded food waste <b>${d.todayWaste} kg</b> है और इस सप्ताह का total <b>${d.totalWaste} kg</b> है।`:hinglish?`Aaj ka food waste <b>${d.todayWaste} kg</b> hai aur is week ka total <b>${d.totalWaste} kg</b> hai.`:`Today's recorded food waste is <b>${d.todayWaste} kg</b>, and this week's total is <b>${d.totalWaste} kg</b>.`;
+      if(intent==='bin') return target?(hi?`${target.bin} अभी <b>${target.fill}</b> full है और status <b>${target.status}</b> है। ${critical?'Collection priority है।':''}`:hinglish?`${target.bin} abhi <b>${target.fill}</b> full hai aur status <b>${target.status}</b> hai. ${critical?'Collection priority hai.':''}`:`${target.bin} is currently <b>${target.fill}</b> full with <b>${target.status}</b> status. ${critical?'It should be collected now.':''}`):(hi?'Dashboard पर कोई bin reading उपलब्ध नहीं है।':'No bin reading is currently available.');
+      if(intent==='collection') return fill>=80?(hi?`हाँ. Bin <b>${fill}%</b> है, इसलिए अभी collection schedule करना बेहतर है।`:hinglish?`Haan. Bin <b>${fill}%</b> hai, isliye abhi collection schedule karna better hai.`:`Yes. The bin is at <b>${fill}%</b>, so I recommend scheduling collection now.`):(hi?`अभी immediate collection जरूरी नहीं है। Bin <b>${fill}%</b> पर है; next peak से पहले फिर check करें।`:hinglish?`Abhi immediate collection zaroori nahi hai. Bin <b>${fill}%</b> par hai; next peak se pehle recheck karo.`:`Immediate collection is not necessary yet. The bin is at <b>${fill}%</b>; recheck before the next peak.`);
+      if(intent==='prediction'){const mins=Math.max(12,Math.round((100-fill)/(fill>=80 ? .9 : .6)));return hi?`Current fill <b>${fill}%</b> है। लगभग <b>${mins} minutes</b> में critical window आ सकती है।`:hinglish?`Current fill <b>${fill}%</b> hai. Lagbhag <b>${mins} minutes</b> mein critical window aa sakti hai.`:`Current fill is <b>${fill}%</b>. The next critical window may arrive in approximately <b>${mins} minutes</b>.`;}
+      if(intent==='system') return `<b>System status</b><br>${(d.system||[]).map(s=>`${s.name}: <b>${s.state}</b>`).join('<br>')||'No system telemetry available.'}`;
+      if(intent==='temperature') return hi?`Current temperature <b>${d.temperature}°C</b> है।`:hinglish?`Current temperature <b>${d.temperature}°C</b> hai.`:`The current displayed temperature is <b>${d.temperature}°C</b>.`;
+      if(intent==='alerts') return `<b>Current alerts</b><br>${(d.alerts||[]).slice(0,5).map(a=>`${a.title}<br><span style="color:var(--text-faint)">${a.time} · ${a.action}</span>`).join('<br><br>')||'No current alerts.'}`;
+      if(intent==='analytics'){document.getElementById('analytics')?.scrollIntoView({behavior:'smooth'});return hi?'Analytics खोल रही हूँ।':hinglish?'Analytics open kar rahi hoon.':'Opening Analytics.';}
+      if(intent==='saving') return hi?`<b>Cost-saving insight</b><br>Demo baseline ₹5,000/week है; 20% reduction लगभग ₹1,000/week potential saving दिखाता है।`:hinglish?`<b>Cost-saving insight</b><br>Demo baseline ₹5,000/week hai; 20% reduction around ₹1,000/week potential saving hai.`:`<b>Cost-saving insight</b><br>The illustrative demo baseline is ₹5,000/week; a 20% reduction represents about ₹1,000/week potential savings.`;
+      if(intent==='sustainability') return '<b>Sustainability Impact</b><br>Food Waste Reduced: <b>18%</b><br>Food Saved: <b>12.4 kg</b><br>Students Participating: <b>186</b><br>Eco Points: <b>2,840</b><br><span style="color:var(--text-faint)">Demo metrics are illustrative.</span>';
+      if(intent==='foodImpact'){
+        const grams=Math.max(0,parseFloat(String(d.todayWaste).replace(/[^0-9.]/g,''))*1000);
+        const eq=grams/600;
+        const full=Math.floor(eq), rem=Math.round(grams-full*600);
+        const wording=full>0?`${full} full meal-equivalent${full===1?'':'s'}${rem?` + ${rem} g toward another`:''}`:`${Math.round(grams)} g — less than one full 600 g meal-equivalent`;
+        if(hi) return `<b>🍚 Food impact</b><br>Aaj ka recorded waste <b>${Math.round(grams)} g</b> hai — roughly <b>${wording}</b>.<br><br><span style="color:var(--text-faint)">600 g यहाँ project ke illustrative adult meal-equivalent assumption ke liye use ho raha hai. Ye nutrition ya food-safety guarantee nahi hai.</span><br><br><b>Food ko waste karne se pehle sochiye.</b>`;
+        if(hinglish) return `<b>🍚 Food impact</b><br>Aaj ka recorded waste <b>${Math.round(grams)} g</b> hai — roughly <b>${wording}</b>.<br><br><span style="color:var(--text-faint)">600 g yahan project ke illustrative adult meal-equivalent assumption ke liye use ho raha hai. Ye nutrition ya food-safety guarantee nahi hai.</span><br><br><b>Food ko waste karne se pehle ek baar socho.</b>`;
+        return `<b>🍚 Food impact</b><br>Today's recorded waste is <b>${Math.round(grams)} g</b> — roughly <b>${wording}</b>.<br><br><span style="color:var(--text-faint)">The 600 g figure is an illustrative adult meal-equivalent assumption for this project. It is not a nutrition or food-safety guarantee.</span><br><br><b>Before wasting food, remember what that food could have represented.</b>`;
+      }
+      if(intent==='action'){
+        if(fill>=100) return hi?'<b>तुरंत action:</b> Bin full है। Waste डालना रोकें और collection करें।':hinglish?'<b>Immediate action:</b> Bin full hai. Waste adding stop karo aur collection karo.':'<b>Immediate action:</b> The bin is full. Stop adding waste and collect it now.';
+        if(fill>=80) return hi?`<b>Next action:</b> Bin <b>${fill}%</b> पर है। Collection जल्दी schedule करें।`:hinglish?`<b>Next action:</b> Bin <b>${fill}%</b> par hai. Collection soon schedule karo.`:`<b>Next action:</b> The bin is at <b>${fill}%</b>. Schedule collection soon.`;
+        return hi?`अभी system normal है। Bin <b>${fill}%</b> पर है; next peak से पहले recheck करें।`:hinglish?`Abhi system normal hai. Bin <b>${fill}%</b> par hai; next peak se pehle recheck karo.`:`The system is currently normal. The bin is at <b>${fill}%</b>; recheck before the next peak.`;
+      }
+      if(intent==='navigation'){
+        const x=u.text;
+        const routes=[['dashboard','#dashboard'],['monitoring','#live-monitoring'],['live','#live-monitoring'],['prototype','#physical-system'],['hardware','#physical-system'],['alerts','#alerts'],['eco points','#eco-points'],['student activity','#student-activity'],['food impact','#food-impact'],['meal impact','#food-impact'],['future ai','#future-ai'],['settings','#settings'],['डैशबोर्ड','#dashboard'],['मॉनिटरिंग','#live-monitoring'],['हार्डवेयर','#physical-system'],['अलर्ट','#alerts'],['इको','#eco-points']];
+        const hit=routes.find(([k])=>x.includes(k));
+        if(hit){document.querySelector(hit[1])?.scrollIntoView({behavior:'smooth'});return hi?`${hit[0]} खोल रही हूँ।`:hinglish?`${hit[0]} open kar rahi hoon.`:`Opening ${hit[0]}.`;}
+      }
+      return null;
+    }
+async function answerWithAI(question,d){
+      if(!AI_API_URL) return null;
+      const payload={
+        message:question,
+        language:selectedLanguage,
+        context:{
+          dashboard:d,
+          role:'Canteen owner / manager',
+          instruction:'Answer the exact question asked. Do not repeat the daily briefing unless requested. Use the dashboard data provided. If data is missing, say that clearly. Be concise and practical.'
+        }
+      };
+      try{
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),9000);
+        const r=await fetch(AI_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+        clearTimeout(timer);
+        if(!r.ok) throw new Error('AI '+r.status);
+        const j=await r.json();
+        const answer=j.answer||j.response||j.message||j.output||null;
+        return answer?String(answer):null;
+      }catch(e){ return null; }
+    }
+
+    function pickVoice(){
+      if(!('speechSynthesis' in window)) return null;
+      const voices=window.speechSynthesis.getVoices();
+      if(selectedLanguage==='hi-IN'){
+        const femaleHindi=[/Swara/i,/Kalpana/i,/Heera/i,/Google हिन्दी/i,/Google Hindi Female/i,/Microsoft.*(Swara|Kalpana|Heera)/i];
+        for(const re of femaleHindi){ const v=voices.find(x=>re.test(x.name)&&/^hi(-|_)/i.test(x.lang)); if(v) return v; }
+        return voices.find(x=>/^hi(-|_)/i.test(x.lang)) || null;
+      }
+      const preferred=[/Microsoft.*(Zira|Aria|Jenny|Sara|Sonia)/i,/Google US English/i,/Google UK English Female/i,/Samantha|Karen|Ava|Allison/i,/Microsoft.*(David|Mark|George|Guy|Ryan)/i];
+      for(const re of preferred){ const v=voices.find(x=>re.test(x.name)&&/^en(-|_)/i.test(x.lang)); if(v) return v; }
+      return voices.find(x=>/^en-US/i.test(x.lang)) || voices.find(x=>/^en/i.test(x.lang)) || voices[0] || null;
+    }
+
+    function speak(text,onEnd){
+      if(!('speechSynthesis' in window)){ state.textContent='Voice output unavailable'; onEnd?.(); return; }
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(String(text||''));
+      const v=pickVoice();
+      if(v) u.voice=v;
+      u.lang=selectedLanguage;
+      u.rate=selectedLanguage==='hi-IN' ? .91 : .94;
+      u.pitch=selectedLanguage==='hi-IN'?1.12:1.0;
+      u.volume=1;
+      speaking=true; state.textContent=selectedLanguage==='hi-IN'?'Cora is speaking Hindi…':'Cora is speaking…';
+      u.onend=()=>{ speaking=false; state.textContent='Ready · Say a command'; onEnd?.(); };
+      u.onerror=()=>{ speaking=false; state.textContent='Voice output blocked — use the microphone or Start Cora'; onEnd?.(); };
+      speechSynthesis.speak(u);
+    }
+    function stopListening(){
+      try{ recognition?.stop(); }catch(e){}
+      mic?.classList.remove('listening');
+    }
+
+    async function ensureMicPermission(){
+      if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return true;
+      try{
+        const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+        stream.getTracks().forEach(t=>t.stop());
+        return true;
+      }catch(err){
+        const map={NotAllowedError:'Microphone permission is blocked. Allow microphone access for CanteenIQ.',NotFoundError:'No microphone was found on this device.',NotReadableError:'The microphone is busy in another app.'};
+        state.textContent=map[err?.name]||'Microphone could not be opened. Check browser permissions.';
+        return false;
+      }
+    }
+
+    function startListening(){
+      if(!recognition){
+        state.textContent='Browser voice recognition is unavailable. Please use Chrome or Edge.';
+        return;
+      }
+      if(document.hidden){
+        state.textContent='Return to the CanteenIQ tab to use voice commands.';
+        return;
+      }
+      openCora(false);
+      recognition.lang=(selectedLanguage==='hinglish'?'en-IN':selectedLanguage); recognition.maxAlternatives=5;
+      try{
+        recognition.start();
+      }catch(e){
+        if(e && e.name==='InvalidStateError') return;
+        state.textContent='Microphone is starting…';
+      }
+    }
+
+    async function unlockVoice(){
+      activated=true;
+      hasActivatedFlag=true;
+      try{ localStorage.setItem('coraActivated','true'); }catch(e){}
+      selectedLanguage=languageSelect?.value || selectedLanguage;
+      localStorage.setItem('coraLanguage',selectedLanguage);
+      if(recognition) recognition.lang=(selectedLanguage==='hinglish'?'en-IN':selectedLanguage);
+      activateOverlay?.classList.add('hidden');
+      openCora(false);
+      panel.setAttribute('aria-hidden','false');
+      if('speechSynthesis' in window){
+        speechSynthesis.cancel();
+        speechSynthesis.getVoices();
+        try{ await speechSynthesis.resume(); }catch(e){}
+      }
+      return true;
+    }
+
+    async function runDailyBriefing(){
+      if(autoBriefingStarted || !activated) return;
+      autoBriefingStarted=true;
+      openCora(false);
+      state.textContent='Preparing your daily CanteenIQ analysis…';
+      let d=dashboardSnapshot();
+      const live=await fetchLiveData();
+      if(live) d={...d,...live};
+      messages.innerHTML='';
+      addMsg(briefingHtml(d),'ai');
+      const speech=dailyBriefingText(d);
+      speak(speech,()=>{
+        if(recognition && !document.hidden) setTimeout(startListening,450);
+      });
+    }
+
+    async function askCora(q,source='text'){
+      const text=String(q||'').trim();
+      if(!text) return;
+
+      const normalized=normalizeCommand(text);
+      const now=Date.now();
+
+      if(normalized===lastProcessedTranscript && now-lastProcessedAt<1800) return;
+      lastProcessedTranscript=normalized;
+      lastProcessedAt=now;
+
+      const seq=++responseSequence;
+      processingCommand=true;
+      try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){}
+      speaking=false;
+      stopListening();
+
+      openCora(false);
+      addMsg(text,'user');
+      input.value='';
+      state.textContent=selectedLanguage==='hi-IN'?'सवाल समझ रही हूँ…':selectedLanguage==='hinglish'?'Question samajh rahi hoon…':'Listening to your request…';
+
+      try{
+        let d=dashboardSnapshot();
+        const live=await fetchLiveData();
+        if(live) d={...d,...live};
+
+        if(seq!==responseSequence) return;
+        state.textContent=selectedLanguage==='hi-IN'?'अर्थ समझ रही हूँ…':selectedLanguage==='hinglish'?'Meaning samajh rahi hoon…':'Understanding what you mean…';
+
+        let answer=await answerWithAI(text,d);
+
+        if(seq!==responseSequence) return;
+
+        if(!answer){
+          state.textContent=selectedLanguage==='hi-IN'?'डैशबोर्ड से मिलान कर रही हूँ…':selectedLanguage==='hinglish'?'Dashboard se match kar rahi hoon…':'Synchronizing with live dashboard…';
+          answer=answerLocal(text,d);
+        }
+
+        if(seq!==responseSequence) return;
+
+        if(!answer){
+          answer=selectedLanguage==='hi-IN'
+            ? 'मैंने आपकी बात समझने की कोशिश की। यह CanteenIQ के मौजूदा dashboard data से सीधे उपलब्ध उत्तर नहीं है। आप सवाल किसी भी सामान्य तरीके से पूछ सकते हैं, और AI backend जुड़ा होने पर Cora उसका semantic answer देगी।'
+            : selectedLanguage==='hinglish'
+            ? 'Maine aapki baat samajhne ki koshish ki. Is question ka direct answer current CanteenIQ dashboard data mein available nahi hai. Aap natural way mein hi poochte raho; AI backend connected hone par Cora semantic answer degi.'
+            : 'I understood your request, but the current dashboard does not contain enough data for a reliable answer. Ask naturally; with the AI backend connected, Cora can answer broader dashboard-related questions semantically.';
+        }
+
+        if(seq!==responseSequence) return;
+
+        state.textContent=selectedLanguage==='hi-IN'?'उत्तर तैयार है…':selectedLanguage==='hinglish'?'Best answer ready…':'Answer ready…';
+        addMsg(answer,'ai');
+
+        const spoken=answer.replace(/<[^>]+>/g,' ').replace(/•/g,' ').replace(/\s+/g,' ').trim();
+        speak(spoken,()=>{
+          if(seq!==responseSequence) return;
+          processingCommand=false;
+          if(recognition&&activated&&!document.hidden) setTimeout(startListening,350);
+        });
+      }catch(err){
+        if(seq!==responseSequence) return;
+        processingCommand=false;
+        const msg=selectedLanguage==='hi-IN'
+          ? 'Command process करने में समस्या हुई। कृपया फिर से बोलिए।'
+          : selectedLanguage==='hinglish'
+          ? 'Command process karne mein problem hui. Please phir se bolo.'
+          : 'I had trouble processing that command. Please say it again.';
+        addMsg(msg,'ai');
+        speak(msg,()=>{if(seq===responseSequence&&recognition&&activated&&!document.hidden)setTimeout(startListening,350);});
+      }
+    }
+    send.addEventListener('click',()=>askCora(input.value));
+    input.addEventListener('keydown',e=>{ if(e.key==='Enter') askCora(input.value); });
+    document.querySelectorAll('[data-cora]').forEach(b=>b.addEventListener('click',()=>askCora(b.dataset.cora)));
+
+    const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+    let micStarting=false;
+    if(SpeechRecognition){
+      recognition=new SpeechRecognition();
+      recognition.interimResults=true;
+      recognition.continuous=false;
+      recognition.maxAlternatives=5;
+      let heardText='';
+
+      recognition.onstart=()=>{
+        heardText='';
+        micStarting=false;
+        mic.classList.add('listening');
+        state.textContent=selectedLanguage==='hi-IN'?'सुन रही हूँ…':selectedLanguage==='hinglish'?'Sun rahi hoon…':'Listening… speak naturally';
+      };
+
+      recognition.onresult=e=>{
+        let interim='';
+        for(let i=e.resultIndex;i<e.results.length;i++){
+          const phrase=e.results[i][0].transcript;
+          if(e.results[i].isFinal) heardText+=' '+phrase;
+          else interim+=phrase;
+        }
+        input.value=(heardText+' '+interim).trim();
+        if(interim){
+          state.textContent=(selectedLanguage==='hi-IN'?'सुन रही हूँ: ':selectedLanguage==='hinglish'?'Sun rahi hoon: ':'Listening: ')+interim;
+        }else if(heardText.trim()){
+          state.textContent=selectedLanguage==='hi-IN'?'समझ रही हूँ…':selectedLanguage==='hinglish'?'Samajh rahi hoon…':'Understanding…';
+        }
+      };
+
+      recognition.onend=()=>{
+        mic.classList.remove('listening');
+        micStarting=false;
+        const finalText=heardText.trim();
+        input.value=finalText;
+        if(finalText) askCora(finalText,'voice');
+        else if(!speaking) state.textContent='Ready · Say a command';
+      };
+
+      recognition.onerror=e=>{
+        mic.classList.remove('listening');
+        micStarting=false;
+        if(e.error==='aborted') return;
+        const msg=e.error==='not-allowed'
+          ? 'Microphone permission is blocked. Allow microphone access for CanteenIQ.'
+          : e.error==='no-speech'
+          ? 'I did not hear anything. Tap the mic and speak naturally.'
+          : e.error==='audio-capture'
+          ? 'No microphone input is available.'
+          : 'Voice input error: '+e.error;
+        state.textContent=msg;
+      };
+
+      mic.addEventListener('click',async()=>{
+        if(micStarting || mic.classList.contains('listening')) return;
+        micStarting=true;
+        try{
+          await unlockVoice();
+          if('speechSynthesis' in window) try{speechSynthesis.cancel();}catch(e){}
+          speaking=false;
+          const ok=await ensureMicPermission();
+          if(ok) startListening();
+        }finally{
+          micStarting=false;
+        }
+      });
+    }else{
+      state.textContent='Voice recognition unavailable in this browser. Use Chrome or Edge.';
+      mic.title='Voice recognition unavailable in this browser';
+    }
+
+    activateBtn?.addEventListener('click',async()=>{
+      selectedLanguage=languageSelect?.value || 'en-US';
+      localStorage.setItem('coraLanguage',selectedLanguage);
+      if(recognition) recognition.lang=(selectedLanguage==='hinglish'?'en-IN':selectedLanguage);
+      await unlockVoice();
+      if('speechSynthesis' in window){ try{ speechSynthesis.cancel(); speechSynthesis.resume(); }catch(e){} }
+      stopListening();
+      runDailyBriefing();
+    });
+
+    languageSelect?.addEventListener('change',()=>{
+      selectedLanguage=languageSelect.value;
+      localStorage.setItem('coraLanguage',selectedLanguage);
+      if(recognition) recognition.lang=(selectedLanguage==='hinglish'?'en-IN':selectedLanguage);
+      state.textContent=selectedLanguage==='hi-IN' ? 'Hindi selected · Browser voice' : 'English selected';
+    });
+
+    // First-run activation required by browsers for autoplay and mic access.
+    window.addEventListener('load',()=>{
+      if(!hasActivatedFlag){
+        activated=false;
+        autoBriefingStarted=false;
+        panel?.classList.remove('open');
+        premiumPanel?.classList.remove('open');
+        activateOverlay?.classList.remove('hidden');
+        if(languageSelect){
+          const saved=localStorage.getItem('coraLanguage');
+          languageSelect.value=(saved==='en-US'||saved==='hi-IN'||saved==='hinglish')?saved:'en-US';
+        }
+      }
+    });
+
+    document.addEventListener('keydown',(e)=>{
+      if(e.key==='Escape'){
+        if('speechSynthesis' in window) speechSynthesis.cancel();
+        stopListening();
+        speaking=false;
+        state.textContent='Cora stopped';
+      }
+    });
+
+    /* ---------- PREMIUM CORA COMMAND CENTER ---------- */
+    const premium=document.getElementById('coraCommand');
+    const liveOrb=document.getElementById('coraLiveOrb');
+    const watchTitle=document.getElementById('coraWatchTitle');
+    const watchLine=document.getElementById('coraWatchLine');
+    const recText=document.getElementById('coraRecommendation');
+    const thought=document.getElementById('coraThought');
+    const emergencyOverlay=document.getElementById('coraEmergencyOverlay');
+    const judgeDemoBtn=document.getElementById('judgeDemoBtn');
+    const ackEmergency=document.getElementById('ackEmergency');
+    const reasonFillEl=document.getElementById('reasonFill');
+    const reasonRiskEl=document.getElementById('reasonRisk');
+    const reasonPredEl=document.getElementById('reasonPrediction');
+
+    function coraGaugeFill(){
+      const v=parseFloat(document.getElementById('gaugePct')?.textContent||'');
+      return Number.isFinite(v)?v:72;
+    }
+    function coraHighestFill(){
+      const mono=[...document.querySelectorAll('#dashboard .kpi-card')].find(c=>/Bin Fill Level/i.test(c.querySelector('.label')?.textContent||''))?.querySelector('.mono-num');
+      const v=parseFloat(mono?.dataset.count!=='0'? (mono?.dataset.count||mono?.textContent) : mono?.textContent);
+      return Number.isFinite(v)&&v>0?v:87;
+    }
+    function updateCoraCommand(){
+      const fill=Math.round(coraHighestFill());
+      const gaugeFill=Math.round(coraGaugeFill());
+      const demo=window.__binDemoState||{};
+      const critical=fill>=80, warning=fill>=60;
+      const demoActive=!!demo.active;
+      premium?.classList.add('open');
+      liveOrb?.classList.remove('warning','critical','analyzing');
+      liveOrb?.classList.add(critical?'critical':warning?'warning':'analyzing');
+      if(reasonFillEl) reasonFillEl.textContent=fill+'%';
+      if(reasonRiskEl) reasonRiskEl.textContent=critical?'CRITICAL':warning?'WARNING':'NORMAL';
+      const mins=Math.max(12,Math.round((100-fill)/(critical?0.9:0.6)));
+      if(reasonPredEl) reasonPredEl.textContent=fill>=100?'NOW':`~${mins} min`;
+      if(fill>=100){
+        watchTitle.textContent='🔴 Emergency detected — BIN 01 FULL';
+        watchLine.textContent='Immediate collection required · Ultrasonic sensor verified';
+        recText.textContent='Collect Bin 01 immediately. Stop adding waste until cleared.';
+        thought.innerHTML='<span>✓</span> Risk identified <span>✓</span> Recommendation generated';
+      }else if(demoActive){
+        watchTitle.textContent='⚠ Demo active — Bin 01 at '+gaugeFill+'%';
+        watchLine.textContent='Simulated ESP32 + ultrasonic reading · Predictive monitoring';
+        recText.textContent=`Monitor Bin 01 closely during the demo sequence.`;
+        thought.innerHTML='<span>◌</span> Reading sensor data <span>◌</span> Comparing thresholds...';
+      }else if(critical){
+        watchTitle.textContent='⚠ Bin 03 at '+fill+'% — critical threshold';
+        watchLine.textContent='Ultrasonic fill confirmed · Predictive monitoring active';
+        recText.textContent=`Schedule collection of Bin 03 soon. Demo prediction: critical window in about ${mins} minutes.`;
+        thought.innerHTML='<span>✓</span> Reading sensor data <span>✓</span> Risk identified';
+      }else if(warning){
+        watchTitle.textContent='👁 Monitoring Bin 01 at '+gaugeFill+'%';
+        watchLine.textContent='ESP32 connected · Temperature stable · Lunch risk monitored';
+        recText.textContent='Bin 01 is on warning — recheck before the lunch peak.';
+        thought.innerHTML='<span>◌</span> Reading sensor data... <span>◌</span> Comparing thresholds...';
+      }else{
+        watchTitle.textContent='👁 All systems normal';
+        watchLine.textContent='ESP32 connected · Temperature stable · Monitoring bin levels';
+        recText.textContent='Continue normal monitoring.';
+      }
+    }
+
+    document.addEventListener('click',(e)=>{
+      if(e.target.closest('[data-cora]')){
+        setTimeout(()=>{
+          liveOrb?.classList.add('analyzing');
+          if(thought) thought.innerHTML='<span>◌</span> Reading sensor data... <span>◌</span> Generating response...';
+          setTimeout(updateCoraCommand,800);
+        },0);
+      }
+    });
+    ackEmergency?.addEventListener('click',()=>emergencyOverlay?.classList.remove('show'));
+    judgeDemoBtn?.addEventListener('click',async()=>{
+      updateCoraCommand(); premium?.classList.add('open');
+      addMsg('<b>Judge Demo Mode started</b><br>Step 1: Normal monitoring.<br>Step 2: Warning analysis.<br>Step 3: Critical bin simulation and emergency response.','ai');
+      speak('Judge demo mode started. I will now demonstrate sensing, analysis, prediction, alert and action.');
+      await new Promise(r=>setTimeout(r,1800));
+      document.getElementById('simulateBinFull')?.click();
+      setTimeout(()=>{ updateCoraCommand(); emergencyOverlay?.classList.add('show'); },700);
+    });
+    window.addEventListener('cora:emergency',()=>{ updateCoraCommand(); emergencyOverlay?.classList.add('show'); });
+
+    /* ---------- EXTRA PREMIUM INTELLIGENCE ---------- */
+    const proactive=document.getElementById('coraProactive');
+    const proactiveTitle=document.getElementById('coraProactiveTitle');
+    const proactiveText=document.getElementById('coraProactiveText');
+    const mealAssumption=()=> window.CanteenIQFoodImpact?.getStats ? window.CanteenIQFoodImpact.getStats().mealAssumptionGrams : 600;
+    let lastProactiveState='';
+    function showProactive(stateName,title,text){
+      if(!proactive) return;
+      proactive.className='cora-proactive show'+(stateName==='critical'?' critical':'');
+      proactiveTitle.textContent=title; proactiveText.textContent=text;
+      clearTimeout(window.__coraProTimer);
+      window.__coraProTimer=setTimeout(()=>proactive.classList.remove('show'),5200);
+    }
+    document.addEventListener('canteenIQ:foodWasteRecorded',(e)=>{
+      const totalGrams=Math.max(0,Number(e.detail?.totalGrams||0));
+      const mealEq=totalGrams/mealAssumption();
+      const rounded=Math.round(totalGrams);
+      updateCoraCommand();
+      const text=mealEq < 1
+        ? `New waste reading: ${rounded} g today. Every gram matters — take only what you need.`
+        : `New waste reading: ${rounded} g today, roughly ${mealEq.toFixed(1)} adult meal-equivalents using the 600 g project assumption.`;
+      showProactive(mealEq>=1?'warning':'normal','Update — CanteenIQ food-impact analysis',text);
+    });
+    function updateExtraCards(){
+      const fill=Math.round(coraHighestFill());
+      const saving=document.getElementById('coraSaving');
+      const health=document.getElementById('coraHealth');
+      const next=document.getElementById('coraNextCheck');
+      if(saving) saving.textContent=fill>=80?'₹1,000/wk':'₹1,250/wk';
+      if(health) health.textContent='5/5 ONLINE';
+      if(next) next.textContent=fill>=100?'NOW':fill>=80?'~8 min':'~15 min';
+      const stateName=fill>=100?'critical':fill>=80?'warning':'normal';
+      if(stateName!==lastProactiveState && lastProactiveState!==''){
+        if(stateName==='critical') showProactive('critical','Emergency — Bin 01 is full','Immediate collection is required.');
+        else if(stateName==='warning') showProactive('warning','Warning — Bin 03 near critical','Bin 03 is approaching the critical threshold.');
+        else showProactive('normal','System stabilized','Bins have returned to normal monitoring.');
+      }
+      lastProactiveState=stateName;
+    }
+    const exportBtn=document.getElementById('coraExportReport');
+    exportBtn?.addEventListener('click',()=>{
+      const d=dashboardSnapshot();
+      const report=[
+        'CanteenIQ — Cora Operations Report',
+        'Generated: '+new Date().toLocaleString(),
+        '',
+        'Today waste: '+d.todayWaste+' kg',
+        'Weekly waste: '+d.totalWaste+' kg',
+        'Highest fill: '+d.fill+'%',
+        'Temperature: '+d.temperature+'°C',
+        'Sensor health: 5/5 online',
+        'Estimated demo saving: ₹1,000/week',
+        '',
+        'Note: Demo/sample values are illustrative until live hardware/API data is connected.'
+      ].join('\n');
+      const blob=new Blob([report],{type:'text/plain'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='CanteenIQ-Cora-Report.txt'; document.body.appendChild(a); a.click(); a.remove();
+      showProactive('normal','Report exported','Cora saved the current dashboard snapshot as a text report.');
+    });
+    setInterval(()=>{ updateCoraCommand(); updateExtraCards(); },3000);
+    setTimeout(()=>{ updateCoraCommand(); updateExtraCards(); },1600);
+
+    window.CanteenIQ = window.CanteenIQ || {};
+    if(window.CanteenIQFoodImpact){
+      window.CanteenIQ.ingestWasteFromHardware=window.CanteenIQFoodImpact.ingestHardwareWaste;
+    }
+    window.Cora={
+      ask:askCora,
+      getDashboardSnapshot:dashboardSnapshot,
+      speak,
+      open:openCora,
+      close:closeCora,
+      startListening,
+      dailyBriefing:runDailyBriefing
+    };
+  })();
+</script>
+<script>
+  /* ==================================================================
+     JUDGE EDITION VISUAL ENHANCEMENT · Script 4 of 4
+     ================================================================== */
+  (function(){
+    document.body.classList.add('judge-theme');
+
+    // Live clock in the top pill.
+    function tickPill(){
+      const el=document.getElementById('pillTime');
+      if(el) el.textContent=new Date().toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    }
+    tickPill();
+    setInterval(tickPill,1000);
+
+    const reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+
+    document.querySelectorAll('.card').forEach(card=>{
+      card.classList.add('judge-tilt');
+      let frame=0;
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        cancelAnimationFrame(frame);
+        frame=requestAnimationFrame(()=>{
+          card.style.transform=`perspective(900px) rotateX(${(-y*3.2).toFixed(2)}deg) rotateY(${(x*3.2).toFixed(2)}deg) translateZ(2px)`;
+        });
+      });
+      card.addEventListener('pointerleave',()=>{
+        cancelAnimationFrame(frame);
+        card.style.transform='';
+      });
+    });
+
+    const hero=document.querySelector('.hero');
+    const core=document.querySelector('.judge-core');
+    const visual=document.querySelector('.judge-hero-visual');
+    if(hero && core && visual){
+      hero.addEventListener('pointermove',e=>{
+        const r=hero.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        core.style.transform=`translate(-50%,-50%) rotateX(${(8-y*10).toFixed(2)}deg) rotateY(${(-12+x*16).toFixed(2)}deg)`;
+        visual.style.transform=`translate(${(x*6).toFixed(1)}px,${(y*5).toFixed(1)}px)`;
+      });
+      hero.addEventListener('pointerleave',()=>{
+        core.style.transform='translate(-50%,-50%) rotateX(8deg) rotateY(-12deg)';
+        visual.style.transform='';
+      });
+    }
+
+    const ribbon=document.querySelector('.judge-data-ribbon');
+    if(ribbon){
+      window.addEventListener('scroll',()=>{
+        const y=window.scrollY;
+        ribbon.style.transform=`translateY(${Math.min(10,y*.015)}px)`;
+      },{passive:true});
+    }
+  })();
+</script>
+
+
+<script>
+/* CanteenIQ feature pack: optimizer, routing, leaderboard, ROI and judge controls. */
+(function initCanteenIQFeaturePack(){
+  const $ = id => document.getElementById(id);
+  const state = {votes:64, savedKg:3.2, costPerKg:150, carbonPerKg:2.5, compost:12, surplus:3.5, biogas:0};
+  const money = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+  function updatePrep(){
+    const votePct = Math.min(95, Math.max(20, Math.round(state.votes)));
+    const saved = Math.max(0.5, (votePct/100)*5);
+    state.savedKg = Number(saved.toFixed(1));
+    const recommendation = Math.round(Math.max(5, Math.min(25, (100-votePct)*0.45+8)));
+    if($('prepRecommendation')) $('prepRecommendation').textContent = 'Cook ' + recommendation + '% less';
+    if($('prepReason')) $('prepReason').textContent = `Sample model: 25% historical rice leftovers, adjusted using ${state.votes} menu-interest votes. Staff review required before production changes.`;
+    if($('prepWasteSaved')) $('prepWasteSaved').textContent = state.savedKg.toFixed(1)+' kg';
+    if($('prepMoneySaved')) $('prepMoneySaved').textContent = money(state.savedKg*state.costPerKg);
+    if($('prepVoteCount')) $('prepVoteCount').textContent = state.votes+' votes';
+    if($('riceVoteLabel')) $('riceVoteLabel').textContent = votePct+'%';
+    if($('riceVoteBar')) $('riceVoteBar').style.width = votePct+'%';
+    updateROI();
+  }
+  function updateROI(){
+    if($('roiMoney')) $('roiMoney').textContent = money(state.savedKg*state.costPerKg);
+    if($('roiCarbon')) $('roiCarbon').textContent = (state.savedKg*state.carbonPerKg).toFixed(1)+' kg';
+    if($('roiWaste')) $('roiWaste').textContent = state.savedKg.toFixed(1)+' kg';
+  }
+  $('recalculatePrep')?.addEventListener('click', updatePrep);
+  $('addMenuVote')?.addEventListener('click', ()=>{state.votes++;updatePrep();});
+  $('routeSurplus')?.addEventListener('click', ()=>{
+    const status=$('routingStatus');
+    if(status) status.textContent='Safety-check simulation complete: 3.5 kg marked for partner review. No donation is confirmed until handling records and recipient acceptance are verified.';
+    if($('surplusKg')) $('surplusKg').textContent=state.surplus.toFixed(1)+' kg';
+  });
+  $('routeCompost')?.addEventListener('click', ()=>{
+    state.compost += 0.5;
+    if($('compostKg')) $('compostKg').textContent=state.compost.toFixed(1)+' kg';
+    if($('routingStatus')) $('routingStatus').textContent='Demo compost batch logged. Confirm actual weight at the composting facility.';
+  });
+  $('refreshHostelBoard')?.addEventListener('click', ()=>{
+    if($('hostelWinner')) $('hostelWinner').textContent='Hostel A leads';
+    if($('hostelLeadingRate')) $('hostelLeadingRate').textContent='0.12 kg';
+    if($('hostelChallengePoints')) $('hostelChallengePoints').textContent='920';
+  });
+  $('awardEcoPoints')?.addEventListener('click', ()=>{
+    const el=$('hostelChallengePoints');
+    if(el) el.textContent=String((Number(el.textContent)||920)+50);
+    if($('hostelWinner')) $('hostelWinner').textContent='+50 demo points awarded';
+  });
+
+  const drawer=$('judgeDrawer'), launch=$('judgeDrawerLaunch');
+  function setDrawer(open){
+    drawer?.classList.toggle('open',open);
+    launch?.setAttribute('aria-expanded',String(open));
+  }
+  launch?.addEventListener('click',()=>setDrawer(!drawer?.classList.contains('open')));
+  $('judgeDrawerClose')?.addEventListener('click',()=>setDrawer(false));
+  function setDemoStatus(message){if($('judgeDrawerStatus')) $('judgeDrawerStatus').textContent=message;}
+  $('judgeOverflow')?.addEventListener('click',()=>{
+    $('simulateBinFull')?.click();
+    setDemoStatus('Overflow scenario triggered · Bin 01 critical · alert sequence requested.');
+  });
+  $('judgeWasteDrop')?.addEventListener('click',()=>{
+    const ok=window.CanteenIQFoodImpact?.recordFoodWaste?.(1500,'Judge Simulator · +1.5 kg');
+    setDemoStatus(ok?'Heavy waste event recorded in demo totals · +1,500 g.':'Food-impact module is not ready; no value was recorded.');
+  });
+  $('judgeGasTrigger')?.addEventListener('click',()=>{
+    const alert=$('binFullAlert');
+    if(alert){
+      alert.classList.add('show');
+      if($('binAlertTitle')) $('binAlertTitle').textContent='GAS THRESHOLD — SPOILAGE RISK';
+      if($('binAlertText')) $('binAlertText').textContent='Simulated gas sensor threshold exceeded. Isolate the suspected waste stream and inspect the bin before handling.';
+      if($('binAlertMeta')) $('binAlertMeta').textContent='Demo event · MQ-series gas sensor threshold · Verification required';
+    }
+    window.dispatchEvent(new CustomEvent('cora:gas-warning'));
+    window.Cora?.open?.(false);
+    window.Cora?.speak?.('Warning. A simulated gas threshold has been exceeded. Please inspect and isolate the waste stream.');
+    setDemoStatus('Gas threshold simulation active · Spoilage inspection warning displayed.');
+  });
+  $('judgeReset')?.addEventListener('click',()=>{
+    $('resetBinDemo')?.click();
+    $('binFullAlert')?.classList.remove('show');
+    setDemoStatus('Demo reset requested · ready for the next scenario.');
+  });
+  window.addEventListener('cora:gas-warning',()=>{
+    const title=$('coraProactiveTitle'), body=$('coraProactiveText'), box=$('coraProactive');
+    if(title) title.textContent='Gas threshold warning';
+    if(body) body.textContent='Simulated gas reading exceeded the configured threshold. Inspect the bin and verify the sensor reading.';
+    box?.classList.add('show','critical');
+  });
+  updatePrep();
+})();
+</script>
+
+</body>
+</html>
